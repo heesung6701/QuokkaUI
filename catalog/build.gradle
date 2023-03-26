@@ -46,6 +46,7 @@ dependencies {
     implementation project(':anchor')
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // https://maven.google.com/web/index.html?q=compose-#androidx.compose:compose-bom:2023.03.00
@@ -53,6 +54,9 @@ dependencies {
 
     implementation(libs.androidxActivityCompose)
     implementation("androidx.compose.foundation:foundation")
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-tooling")
+    implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
 
     testImplementation libs.junit

@@ -1,16 +1,25 @@
 [versions]
 activity = "1.7.0"
 androidGradlePlugin = "7.4.2"
+androidxTestExtJunit = "1.1.5"
 annotation = "1.6.0"
 core = "1.9.0"
+composeCompiler = "1.4.4" # https://developer.android.com/jetpack/androidx/releases/compose-kotlin?hl=ko#pre-release_kotlin_compatibility
+espresso = "3.5.1"
 kotlin = "1.8.10"
+junit = "4.13"
 
 [libraries]
 androidGradlePluginz = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
 androidxActivityCompose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
+androidxAnnotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
 androidxAnnotationJvm = { module = "androidx.annotation:annotation-jvm", version.ref = "annotation" }
 androidxCore = { module = "androidx.core:core", version.ref = "core" }
 androidxCoreKtx = { module = "androidx.core:core-ktx", version.ref = "core" }
+androidxComposeCompiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeCompiler" }
+espressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
+junit = { module = "junit:junit", version.ref = "junit" }
 kotlinGradlePluginz = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+testExtJunit = { module = "androidx.test.ext:junit", version.ref = "androidxTestExtJunit" }
 
 [plugins]

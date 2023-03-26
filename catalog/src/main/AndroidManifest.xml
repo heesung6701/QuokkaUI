@@ -19,11 +19,13 @@
         </activity>
         <activity
             android:name=".touchdelegate.TouchDelegateActivity"
-            android:exported="false"
+            android:title="@string/title_activity_touch_delegate"
+            android:exported="true"
             />
         <activity
             android:name=".anchor.window.DialogAnchorActivity"
-            android:exported="false"
+            android:title="@string/title_activity_dialog_anchor"
+            android:exported="true"
             android:configChanges="screenSize|orientation"
             />
     </application>
