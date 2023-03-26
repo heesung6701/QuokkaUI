@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QukkaUI">
         <activity
-            android:name=".touchdelegate.TouchDelegateActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -21,6 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".touchdelegate.TouchDelegateActivity"
+            android:exported="false"
+            />
+        <activity
+            android:name=".anchor.window.DialogAnchorActivity"
+            android:exported="false"
+            android:configChanges="screenSize|orientation"
+            />
     </application>
 
 </manifest>
