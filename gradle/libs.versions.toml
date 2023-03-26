@@ -1,11 +1,16 @@
 [versions]
 activity = "1.7.0"
 androidGradlePlugin = "7.4.2"
+annotation = "1.6.0"
+core = "1.9.0"
 kotlin = "1.8.10"
 
 [libraries]
 androidGradlePluginz = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
 androidxActivityCompose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
+androidxAnnotationJvm = { module = "androidx.annotation:annotation-jvm", version.ref = "annotation" }
+androidxCore = { module = "androidx.core:core", version.ref = "core" }
+androidxCoreKtx = { module = "androidx.core:core-ktx", version.ref = "core" }
 kotlinGradlePluginz = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
