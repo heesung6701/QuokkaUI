@@ -1,4 +1,4 @@
 rootProject.name = "QukkaUI"
-include ':app'
-include ':TouchDelegate'
-include ':Anchor'
+include ':catalog'
+include ':touchdelegate'
+include ':anchor'

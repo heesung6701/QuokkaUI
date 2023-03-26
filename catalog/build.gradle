@@ -1,0 +1,48 @@
+import quokkaui.build.SupportConfig
+
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.github.heesung6701.quokkaui.catalog'
+    compileSdkVersion SupportConfig.COMPILE_SDK_VERSION
+    buildToolsVersion SupportConfig.BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        applicationId "com.github.heesung6701.quokkaui.catalog"
+        minSdkVersion SupportConfig.DEFAULT_MIN_SDK_VERSION
+        targetSdkVersion SupportConfig.TARGET_SDK_VERSION
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner SupportConfig.INSTRUMENTATION_RUNNER
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation project(':touchdelegate')
+    implementation project(':anchor')
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
