@@ -1,3 +1,5 @@
+import quokkaui.build.SupportConfig
+
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
@@ -5,13 +7,13 @@ plugins {
 
 android {
     namespace 'com.github.heesung6701.quokkaui.anchor'
-    compileSdkVersion 33
+    compileSdkVersion SupportConfig.COMPILE_SDK_VERSION
 
     defaultConfig {
-        minSdkVersion 26
-        targetSdkVersion 33
+        minSdkVersion SupportConfig.DEFAULT_MIN_SDK_VERSION
+        targetSdkVersion SupportConfig.TARGET_SDK_VERSION
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner SupportConfig.INSTRUMENTATION_RUNNER
         consumerProguardFiles "consumer-rules.pro"
     }
 
