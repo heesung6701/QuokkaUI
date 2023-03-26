@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.quokkaman.qukkaui.databinding.ActivityTouchDelegateBinding
-import com.quokkaman.touchdelegate.TouchDelegateSetBuilder
+import com.github.heesung6701.quokkaui.touchdelegate.TouchDelegateSetBuilder
 
 class TouchDelegateActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

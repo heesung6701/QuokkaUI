@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.quokkaman.anchor'
+    namespace 'com.github.heesung6701.quokkaui.anchor'
     compileSdkVersion 33
 
     defaultConfig {

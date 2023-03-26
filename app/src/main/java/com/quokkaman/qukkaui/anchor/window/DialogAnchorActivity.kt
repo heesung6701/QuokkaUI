@@ -8,7 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.quokkaman.qukkaui.R
 import com.quokkaman.qukkaui.common.findAllViews
-import com.quokkaman.anchor.window.WindowAnchorManager
+import com.github.heesung6701.quokkaui.anchor.window.WindowAnchorManager
 import java.util.*
 
 class DialogAnchorActivity : AppCompatActivity() {

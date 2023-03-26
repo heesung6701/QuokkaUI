@@ -1,4 +1,4 @@
-package com.quokkaman.touchdelegate
+package com.github.heesung6701.quokkaui.touchdelegate
 
 import android.graphics.Rect
 import android.graphics.Region
