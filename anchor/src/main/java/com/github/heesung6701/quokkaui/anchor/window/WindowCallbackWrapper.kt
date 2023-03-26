@@ -1,7 +1,9 @@
 package com.github.heesung6701.quokkaui.anchor.window
 
+import android.os.Build
 import android.view.*
 import android.view.accessibility.AccessibilityEvent
+import androidx.annotation.RequiresApi
 
 open class WindowCallbackWrapper(private val base: Window.Callback) : Window.Callback {
     override fun dispatchKeyEvent(p0: KeyEvent?): Boolean = base.dispatchKeyEvent(p0)
@@ -59,12 +61,14 @@ open class WindowCallbackWrapper(private val base: Window.Callback) : Window.Cal
         return base.onSearchRequested()
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onSearchRequested(p0: SearchEvent?): Boolean =
         base.onSearchRequested(p0)
 
     override fun onWindowStartingActionMode(p0: ActionMode.Callback?): ActionMode? =
         base.onWindowStartingActionMode(p0)
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onWindowStartingActionMode(p0: ActionMode.Callback?, p1: Int): ActionMode? =
         base.onWindowStartingActionMode(p0, p1)
 
