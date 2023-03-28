@@ -5,6 +5,8 @@ object SupportConfig {
     const val INSTRUMENTATION_RUNNER = "androidx.test.runner.AndroidJUnitRunner"
     const val BUILD_TOOLS_VERSION = "33.0.0"
 
-    const val COMPILE_SDK_VERSION = 33
+    const val COMPILE_SDK_VERSION = "android-33"
     const val TARGET_SDK_VERSION = 33
+
+    const val GROUP_ID = "com.github.heesung6701.QuokkaUI"
 }
