@@ -12,8 +12,8 @@ android {
 
     defaultConfig {
         applicationId = "com.github.heesung6701.quokkaui.catalog"
-        minSdkVersion(SupportConfig.DEFAULT_MIN_SDK_VERSION)
-        targetSdkVersion(SupportConfig.TARGET_SDK_VERSION)
+        minSdk = SupportConfig.DEFAULT_MIN_SDK_VERSION
+        targetSdk = SupportConfig.TARGET_SDK_VERSION
         versionCode = 1
         versionName = "1.0"
 
@@ -40,11 +40,17 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 }
-val buildMaven = false
+val buildFromMaven = ("true" == project.properties["quokka.catalog.buildFromMaven"])
+println("[QuokkaBuild]: buildFromMaven is $buildFromMaven")
 
 dependencies {
-    implementation(project(":touchdelegate"))
-    implementation(project(":anchor"))
+    if (buildFromMaven) {
+        implementation("com.github.heesung6701.QuokkaUI:touchdelegate:+")
+        implementation("com.github.heesung6701.QuokkaUI:anchor:+")
+    } else {
+        implementation(project(":touchdelegate"))
+        implementation(project(":anchor"))
+    }
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")
