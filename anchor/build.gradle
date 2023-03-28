@@ -41,23 +41,22 @@ dependencies {
     androidTestImplementation libs.espressoCore
 }
 
-
 afterEvaluate {
     publishing{
         publications{
             release(MavenPublication){
                 from components.release
-                groupId = 'con.quokkaman.quokkaui'
+                groupId = SupportConfig.GROUP_ID
                 artifactId = 'anchor'
-                version = '0.0.1'
+                version = '0.0.1-SNAPSHOT'
             }
 
             debug(MavenPublication) {
                 // Applies the component for the debug build variant.
                 from components.debug
-                groupId = 'con.quokkaman.quokkaui'
+                groupId = SupportConfig.GROUP_ID
                 artifactId = 'anchor'
-                version = '0.0.1'
+                version = '0.0.1-SNAPSHOT'
             }
         }
     }
