@@ -9,9 +9,10 @@ import android.view.TouchDelegate
 import android.view.View
 import android.view.accessibility.AccessibilityNodeInfo
 import androidx.annotation.RequiresApi
+import com.github.heesung6701.quokkaui.touchdelegate.ViewKt.calculateBounds
 
 class TouchDelegateSet(anchorView: View) : TouchDelegate(Rect(), anchorView) {
-    private val touchDelegateList = ArrayList<CapturedTouchDelegate>();
+    private val touchDelegateList = ArrayList<CapturedTouchDelegate>()
 
     fun addTouchDelegate(touchDelegate: CapturedTouchDelegate) {
         touchDelegateList.add(touchDelegate)
@@ -44,5 +45,34 @@ class TouchDelegateSet(anchorView: View) : TouchDelegate(Rect(), anchorView) {
         return AccessibilityNodeInfo.TouchDelegateInfo(targetMap)
     }
 
-    class CapturedTouchDelegate(val bounds: Rect, val delegateView: View) : TouchDelegate(bounds, delegateView)
+    class Builder(private val anchorView: View) {
+
+        private val jobs: ArrayList<() -> CapturedTouchDelegate> = ArrayList()
+
+        fun add(childView: View, insets: Insets? = null): Builder {
+            jobs.add {
+                val bounds = anchorView.calculateBounds(childView)
+                insets?.let {
+                    bounds.left -= insets.left
+                    bounds.top -= insets.top
+                    bounds.right += insets.right
+                    bounds.bottom += insets.bottom
+                }
+                CapturedTouchDelegate(bounds, childView)
+            }
+            return this
+        }
+
+        fun done() {
+            anchorView.post {
+                val touchDelegateSet = TouchDelegateSet(anchorView)
+                jobs.forEach {
+                    touchDelegateSet.addTouchDelegate(it.invoke())
+                }
+                anchorView.touchDelegate = touchDelegateSet
+            }
+        }
+
+        data class Insets(val left: Int, val top: Int, val right: Int, val bottom: Int)
+    }
 }
