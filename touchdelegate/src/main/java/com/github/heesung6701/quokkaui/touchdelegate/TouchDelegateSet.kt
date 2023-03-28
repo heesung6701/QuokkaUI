@@ -11,33 +11,36 @@ import android.view.accessibility.AccessibilityNodeInfo
 import androidx.annotation.RequiresApi
 import com.github.heesung6701.quokkaui.touchdelegate.ViewKt.calculateBounds
 
-class TouchDelegateSet(anchorView: View) : TouchDelegate(Rect(), anchorView) {
-    private val touchDelegateList = ArrayList<CapturedTouchDelegate>()
+class TouchDelegateSet(private val anchorView: View) : TouchDelegate(Rect(), anchorView) {
+    private val touchDelegateSet = HashSet<CapturedTouchDelegate>()
 
     fun addTouchDelegate(touchDelegate: CapturedTouchDelegate) {
-        touchDelegateList.add(touchDelegate)
+        touchDelegateSet.add(touchDelegate)
     }
 
     fun removeTouchDelegate(touchDelegate: CapturedTouchDelegate): Boolean =
-        touchDelegateList.remove(touchDelegate)
+        touchDelegateSet.remove(touchDelegate)
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        return touchDelegateList.fold(false) { acc: Boolean, cur: CapturedTouchDelegate ->
+        return touchDelegateSet.fold(false) { acc: Boolean, cur: CapturedTouchDelegate ->
             acc or cur.onTouchEvent(event)
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onTouchExplorationHoverEvent(event: MotionEvent): Boolean {
-        return touchDelegateList.fold(false) { acc: Boolean, cur: CapturedTouchDelegate ->
+        return touchDelegateSet.fold(false) { acc: Boolean, cur: CapturedTouchDelegate ->
             acc or cur.onTouchExplorationHoverEvent(event)
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun getTouchDelegateInfo(): AccessibilityNodeInfo.TouchDelegateInfo {
-        val targetMap: ArrayMap<Region, View> = ArrayMap(touchDelegateList.size)
-        touchDelegateList.forEach {
+        if (touchDelegateSet.size == 0) {
+            return AccessibilityNodeInfo.TouchDelegateInfo(hashMapOf(Pair(Region(), anchorView)))
+        }
+        val targetMap: ArrayMap<Region, View> = ArrayMap(touchDelegateSet.size)
+        touchDelegateSet.forEach {
             it.apply {
                 targetMap[Region(bounds)] = delegateView
             }
