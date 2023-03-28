@@ -34,15 +34,17 @@ class DialogAnchorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dialog_anchor)
 
+        var timer: Timer? = null
         val dialog = AlertDialog.Builder(this, R.style.CustomSmallDialog)
             .setTitle("title")
             .setMessage("message")
             .setPositiveButton("OK") { _, _ ->
-
-            }.create()
+            }
+            .setOnDismissListener {
+                timer?.cancel()
+            }
+            .create()
         anchorManager = WindowAnchorManager(dialog.window!!)
-
-        var timer = Timer()
 
         val buttons = findAllViews { it is Button }
         buttons.forEach {
@@ -51,11 +53,12 @@ class DialogAnchorActivity : AppCompatActivity() {
                 dialog.show()
 
                 if (view.id == R.id.btnRandom) {
-                    timer.purge()
-                    timer = Timer()
-                    timer.schedule(RandomUpdatePositionTask(view), PERIOD, PERIOD)
+                    timer?.cancel()
+                    timer = Timer().apply {
+                        schedule(RandomUpdatePositionTask(view), PERIOD, PERIOD)
+                    }
                 } else {
-                    timer.cancel()
+                    timer?.cancel()
                 }
             }
         }
