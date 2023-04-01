@@ -19,6 +19,8 @@ local.properties
 
 # build folder
 /**/build
+.transforms
+
 # Don't ignore src files under build package
 !**/src/**/build
 

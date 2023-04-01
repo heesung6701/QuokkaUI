@@ -3,6 +3,7 @@ package quokkaui.build
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.create
+import java.io.File
 
 open class QuokkaPlugin : Plugin<Project> {
 
