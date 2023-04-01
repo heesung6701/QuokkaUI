@@ -15,6 +15,16 @@
 local.properties
 
 .idea
+.idea/**
+
+# build folder
+/**/build
+# Don't ignore src files under build package
+!**/src/**/build
 
 # buildSrc
 buildSrc/build/*
+
+# build-logic
+build-logic/plugin/build
+build-logic/.gradle

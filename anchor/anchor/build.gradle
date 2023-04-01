@@ -48,12 +48,16 @@ afterEvaluate {
             release(MavenPublication){
                 from components.release
                 artifactId = 'anchor'
+                groupId = project.group
+                version = project.version
             }
 
             debug(MavenPublication) {
                 // Applies the component for the debug build variant.
                 from components.debug
                 artifactId = 'anchor'
+                groupId = project.group
+                version = project.version
             }
         }
     }
