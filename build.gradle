@@ -15,6 +15,10 @@ buildscript {
     }
 }
 
+plugins {
+    id "quiokkaui.build.QuokkaRootPlugin"
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

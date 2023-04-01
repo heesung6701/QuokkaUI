@@ -3,6 +3,8 @@ package quokkaui.build
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.create
+import org.gradle.kotlin.dsl.extra
+import quokkaui.build.tasks.CollectAarTask
 import java.io.File
 
 open class QuokkaPlugin : Plugin<Project> {
@@ -12,5 +14,14 @@ open class QuokkaPlugin : Plugin<Project> {
     }
     override fun apply(project: Project) {
         project.extensions.create<QuokkaExtension>(EXTENSION_NAME, project)
+
+        project.tasks.register("collectAar", CollectAarTask::class.java) {
+            this.collectDirProperty.set("${project.extra["outDir"]}/collect")
+
+            this.doLast {
+                val collectDir = File(collectDirProperty.get())
+                commandHelper().openFolder(collectDir.canonicalPath)
+            }
+        }
     }
 }
