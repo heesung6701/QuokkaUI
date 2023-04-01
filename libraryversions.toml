@@ -1,0 +1,7 @@
+[versions]
+ANCHOR = "0.0.2"
+TOUCHDELEGATE = "0.0.2"
+
+[groups]
+ANCHOR = { group = "com.github.heesung6701.quokkaui.anchor", atomicGroupVersion = "versions.ANCHOR" }
+TOUCHDELEGATE = { group = "com.github.heesung6701.quokkaui.touchdelegate", atomicGroupVersion = "versions.TOUCHDELEGATE"  }
