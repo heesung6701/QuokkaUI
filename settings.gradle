@@ -1,4 +1,4 @@
 rootProject.name = "QukkaUI"
 include ':catalog'
-include ':touchdelegate'
-include ':anchor'
+include ':touchdelegate:touchdelegate'
+include ':anchor:anchor'
