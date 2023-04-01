@@ -4,10 +4,11 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'maven-publish'
+    id "quiokkaui.build.QuokkaPlugin"
 }
 
 android {
-    namespace 'com.github.heesung6701.quokkaui.touchdelegate'
+    namespace 'com.github.heesung6701.quokkaui.anchor'
     compileSdkVersion SupportConfig.COMPILE_SDK_VERSION
 
     defaultConfig {
@@ -34,7 +35,6 @@ android {
 }
 
 dependencies {
-
     implementation libs.androidxCoreKtx
 
     testImplementation libs.junit
@@ -43,21 +43,17 @@ dependencies {
 }
 
 afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
+    publishing{
+        publications{
+            release(MavenPublication){
                 from components.release
-                groupId = SupportConfig.GROUP_ID
-                artifactId = 'touchdelegate'
-                version = '0.0.1-SNAPSHOT'
+                artifactId = 'anchor'
             }
 
             debug(MavenPublication) {
                 // Applies the component for the debug build variant.
                 from components.debug
-                groupId = SupportConfig.GROUP_ID
-                artifactId = 'touchdelegate'
-                version = '0.0.1-SNAPSHOT'
+                artifactId = 'anchor'
             }
         }
     }
