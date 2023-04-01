@@ -49,7 +49,7 @@ dependencies {
         implementation("com.github.heesung6701.QuokkaUI:anchor:+")
     } else {
         implementation(project(":touchdelegate:touchdelegate"))
-        implementation(project(":anchror:anchor"))
+        implementation(project(":anchor:anchor"))
     }
 
     implementation("androidx.appcompat:appcompat:1.6.1")
