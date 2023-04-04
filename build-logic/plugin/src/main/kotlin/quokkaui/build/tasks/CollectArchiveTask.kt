@@ -34,8 +34,15 @@ abstract class CollectArchiveTask : DefaultTask() {
                 this.collectDirProperty.set(collectDir.absolutePath)
             }
         }
+
+        val pomTasks = project.subprojects.map { subproject ->
+            subproject.tasks.withType(CollectPomTask::class.java) {
+                this.collectDirProperty.set(collectDir.absolutePath)
+            }
+        }
         this.dependsOn(aarTasks)
         this.dependsOn(jarTasks)
+        this.dependsOn(pomTasks)
 
         val zipTask = project.tasks.register("createZip", Zip::class.java) {
             this.from("$collectDir")
