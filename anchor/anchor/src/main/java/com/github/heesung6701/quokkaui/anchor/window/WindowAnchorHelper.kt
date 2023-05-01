@@ -12,11 +12,11 @@ import androidx.core.view.WindowInsetsCompat.Type.statusBars
 
 typealias Strategy = () -> WindowManager.LayoutParams
 
-class WindowAnchorManager(val window: Window) {
+class WindowAnchorHelper(val window: Window) {
 
     companion object {
         var DEBUG = false
-        val TAG = WindowAnchorManager::class.simpleName
+        val TAG = WindowAnchorHelper::class.simpleName
     }
 
     private var strategy: Strategy? = null
