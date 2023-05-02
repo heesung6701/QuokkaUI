@@ -28,3 +28,6 @@ buildSrc/build/*
 # build-logic
 build-logic/plugin/build
 build-logic/.gradle
+
+# out folder
+out/**

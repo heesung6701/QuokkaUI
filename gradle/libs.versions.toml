@@ -8,6 +8,7 @@ composeCompiler = "1.4.4" # https://developer.android.com/jetpack/androidx/relea
 espresso = "3.5.1"
 kotlin = "1.8.10"
 junit = "4.13"
+uiautomator = "2.2.0"
 
 [libraries]
 androidGradlePluginz = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
@@ -17,9 +18,11 @@ androidxAnnotationJvm = { module = "androidx.annotation:annotation-jvm", version
 androidxCore = { module = "androidx.core:core", version.ref = "core" }
 androidxCoreKtx = { module = "androidx.core:core-ktx", version.ref = "core" }
 androidxComposeCompiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeCompiler" }
+androidxTestUiAutomator = { module = "androidx.test.uiautomator:uiautomator", version.ref = "uiautomator"}
 espressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlinGradlePluginz = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 testExtJunit = { module = "androidx.test.ext:junit", version.ref = "androidxTestExtJunit" }
+testExtJunitKtx = { module = "androidx.test.ext:junit-ktx", version.ref = "androidxTestExtJunit" }
 
 [plugins]

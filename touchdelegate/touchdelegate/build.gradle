@@ -40,7 +40,9 @@ dependencies {
 
     testImplementation libs.junit
     androidTestImplementation libs.testExtJunit
+    androidTestImplementation libs.testExtJunitKtx
     androidTestImplementation libs.espressoCore
+    androidTestImplementation libs.androidxTestUiAutomator
 }
 
 afterEvaluate {

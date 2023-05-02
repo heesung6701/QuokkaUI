@@ -16,7 +16,7 @@ object ViewKt {
             val cur = head as View
             Rect().apply {
                 cur.getHitRect(this)
-                bounds.offset(-left, -top)
+                bounds.offset(left, top)
             }
             head = cur.parent ?: throw RuntimeException("only allow child of anchor View")
         }
