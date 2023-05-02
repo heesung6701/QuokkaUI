@@ -76,6 +76,11 @@ class TouchDelegateSet(private val anchorView: View) : TouchDelegate(Rect(), anc
             }
         }
 
-        data class Insets(val left: Int, val top: Int, val right: Int, val bottom: Int)
+        data class Insets(val left: Int, val top: Int, val right: Int, val bottom: Int) {
+            companion object {
+                fun create(size: Int) = Insets(size, size, size, size)
+                fun create(horizontal: Int, vertical: Int) = Insets(horizontal, vertical, horizontal, vertical)
+            }
+        }
     }
 }
