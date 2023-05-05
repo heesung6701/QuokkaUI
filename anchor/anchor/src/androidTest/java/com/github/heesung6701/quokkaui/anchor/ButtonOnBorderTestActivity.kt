@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.view.children
-
 import com.github.heesung6701.quokkaui.anchor.test.R
 import com.github.heesung6701.quokkaui.anchor.window.WindowAnchorHelper
 import java.util.*
@@ -22,6 +21,7 @@ class ButtonOnBorderTestActivity : Activity() {
     lateinit var buttonsList: List<Button>
     var latestDialog: Dialog? = null
 
+    val windowAnchorHelper = WindowAnchorHelper()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.button_on_border_test_activity)
@@ -31,15 +31,19 @@ class ButtonOnBorderTestActivity : Activity() {
             btn.setOnClickListener {
                 val dialog = AlertDialog.Builder(this, R.style.CustomAlertDialog_Small)
                     .setTitle("title")
-                    .setMessage("Thie is Custom alert dialog")
+                    .setMessage("This is Custom alert dialog")
                     .setPositiveButton("OK") { _, _ -> }
                     .create()
-                WindowAnchorHelper(dialog.window!!)
-                    .attach(btn)
+                windowAnchorHelper.attach(dialog.window!!, btn)
                 latestDialog = dialog
                 dialog.show()
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        windowAnchorHelper.clearAll()
     }
 
     private inline fun <reified T> findAllViewWithClass(root: View): List<T> {

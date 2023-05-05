@@ -1,93 +1,27 @@
 package com.github.heesung6701.quokkaui.anchor.window
 
-import android.graphics.Rect
-import android.util.Log
-import android.view.Gravity
 import android.view.View
-import android.view.View.OnLayoutChangeListener
 import android.view.Window
-import android.view.WindowManager
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat.Type.statusBars
 
-typealias Strategy = () -> WindowManager.LayoutParams
+class WindowAnchorHelper {
 
-class WindowAnchorHelper(val window: Window) {
+    private val hashMap = HashMap<Window, WindowAnchorConnector>()
 
-    companion object {
-        var DEBUG = false
-        val TAG = WindowAnchorHelper::class.simpleName
+    fun attach(window: Window, anchor: View) {
+        hashMap[window]?.deactivate()
+        hashMap[window] = WindowAnchorConnector(window, anchor)
     }
 
-    private var strategy: Strategy? = null
-
-    private val layoutChangeListener = OnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-        Log.d(TAG, "OnLayoutChangeListener")
-        relocate()
-    }
-
-    var register: Pair<Runnable, Runnable>? = null
-
-    init {
-        window.callback = object : WindowCallbackWrapper(window.callback) {
-            override fun onContentChanged() {
-                super.onContentChanged()
-                relocate()
-            }
-
-            override fun onAttachedToWindow() {
-                super.onAttachedToWindow()
-                register?.first?.run()
-            }
-
-            override fun onDetachedFromWindow() {
-                super.onDetachedFromWindow()
-                register?.second?.run()
-            }
+    fun detach(window: Window) {
+        hashMap[window]?.let {
+            it.deactivate()
+            hashMap.remove(window)
         }
     }
 
-    fun attach(anchor: View) {
-        strategy = {
-            val statusBarHeight = ViewCompat.getRootWindowInsets(anchor)?.getInsets(statusBars())?.top?:0
-            window.attributes.apply {
-                val rect = Rect().apply {
-                    anchor.getGlobalVisibleRect(this)
-                }
-                x = rect.centerX() - window.decorView.width / 2
-                y = rect.bottom - statusBarHeight
-                gravity = Gravity.LEFT or Gravity.TOP
-            }
-        }
-        register?.second?.run()
-        register = Pair(
-            Runnable {
-                anchor.addOnLayoutChangeListener(layoutChangeListener)
-            },
-            Runnable {
-                anchor.removeOnLayoutChangeListener(layoutChangeListener)
-            }
-        )
-        relocate()
-    }
-
-    private fun relocate() {
-        if (!ViewCompat.isLaidOut(window.decorView)) {
-            window.decorView.visibility = View.GONE
-        }
-        window.decorView.doOnLayout {
-            val attrs = strategy?.invoke() ?: return
-            debug("call relocate attrs: $attrs")
-            window.attributes = attrs
-            if (!window.decorView.isVisible) {
-                window.decorView.visibility = View.VISIBLE
-            }
-        }
-    }
-
-    private fun debug(message: String) {
-        if (DEBUG) {
-            Log.d(TAG, message)
+    fun clearAll() {
+        hashMap.values.forEach {
+            it.deactivate()
         }
     }
 }
