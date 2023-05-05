@@ -72,9 +72,17 @@ class WindowAnchorHelper(val window: Window) {
     }
 
     private fun relocate() {
-        val attrs = strategy?.invoke() ?: return
-        debug("call relocate attrs: $attrs")
-        window.attributes = attrs
+        if (!ViewCompat.isLaidOut(window.decorView)) {
+            window.decorView.visibility = View.GONE
+        }
+        window.decorView.doOnLayout {
+            val attrs = strategy?.invoke() ?: return
+            debug("call relocate attrs: $attrs")
+            window.attributes = attrs
+            if (!window.decorView.isVisible) {
+                window.decorView.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun debug(message: String) {
