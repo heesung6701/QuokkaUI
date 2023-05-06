@@ -21,7 +21,7 @@ class ButtonOnBorderTestActivity : Activity() {
     lateinit var buttonsList: List<Button>
     var latestDialog: Dialog? = null
 
-    val windowAnchorHelper = WindowAnchorHelper()
+    private val windowAnchorHelper = WindowAnchorHelper()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.button_on_border_test_activity)
