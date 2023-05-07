@@ -75,7 +75,7 @@ class WindowAnchorStrategyTest {
     }
 
     @Test
-    fun testReducer_AnchorOnEdgeLeft() {
+    fun testReducer_AnchorOnEdgeAndOuterLeft() {
         testAllDevice { parameters, _, screenHeight ->
             listOf(
                 Pair(-WINDOW_WIDTH, 0),
@@ -104,7 +104,7 @@ class WindowAnchorStrategyTest {
     }
 
     @Test
-    fun testReducer_AnchorOnEdgeRight() {
+    fun testReducer_AnchorOnEdgeAndOuterRight() {
         testAllDevice { parameters, screenWidth, screenHeight ->
             listOf(
                 Pair(screenWidth, 0),
@@ -134,11 +134,9 @@ class WindowAnchorStrategyTest {
 
     @Test
     fun testReducer_AnchorOnEdgeTop() {
-        testAllDevice { parameters, screenWidth, screenHeight ->
+        testAllDevice { parameters, screenWidth, _ ->
             listOf(
-                Pair(0, 0),
-                Pair(0, -WINDOW_HEIGHT),
-                Pair(0, STATUS_BAR_HEIGHT - ANCHOR_VIEW_HEIGHT),
+                Pair(0, STATUS_BAR_HEIGHT)
             ).flatMap {
                 listOf(
                     Pair(0, it.second),
@@ -153,8 +151,39 @@ class WindowAnchorStrategyTest {
                     WindowAnchorStrategy(anchorParameter).apply(prevAttrs)
                 Assert.assertEquals(
                     "anchor on (${it.first}, ${it.second}) with device(${parameters.getRootRect()})",
-                    STATUS_BAR_HEIGHT,
+                    ANCHOR_VIEW_HEIGHT,
                     newAttrs.y
+                )
+            }
+        }
+    }
+
+    @Test
+    fun testReducer_AnchorOnOuterTop() {
+        testAllDevice { parameters, screenWidth, _ ->
+            listOf(
+                Pair(0, STATUS_BAR_HEIGHT - 1),
+                Pair(0, STATUS_BAR_HEIGHT - ANCHOR_VIEW_HEIGHT / 2),
+                Pair(0, STATUS_BAR_HEIGHT - ANCHOR_VIEW_HEIGHT),
+                Pair(0, STATUS_BAR_HEIGHT - WINDOW_HEIGHT / 2),
+                Pair(0, STATUS_BAR_HEIGHT - WINDOW_HEIGHT)
+            ).flatMap {
+                listOf(
+                    Pair(0, it.second),
+                    Pair(screenWidth / 2, it.second),
+                    Pair(screenWidth, it.second),
+                )
+            }.forEach {
+                val anchorParameter =
+                    AnchorParameter(parameters, it.first, it.second)
+                val prevAttrs = WindowManager.LayoutParams()
+                val newAttrs =
+                    WindowAnchorStrategy(anchorParameter).apply(prevAttrs)
+                Assert.assertEquals(
+                    "anchor on (${it.first}, ${it.second}) with device(${parameters.getRootRect()})",
+                    (anchorParameter.y + ANCHOR_VIEW_HEIGHT)
+                        .coerceAtLeast(STATUS_BAR_HEIGHT),
+                    newAttrs.y + STATUS_BAR_HEIGHT
                 )
             }
         }
@@ -163,9 +192,9 @@ class WindowAnchorStrategyTest {
     @Test
     fun testReducer_AnchorOnEdgeBottom() {
         testAllDevice { parameters, screenWidth, screenHeight ->
+            val screenBottom = screenHeight - BOTTOM_BAR_HEIGHT
             listOf(
-                Pair(0, screenHeight - ANCHOR_VIEW_HEIGHT),
-                Pair(0, screenHeight),
+                Pair(0, screenBottom - ANCHOR_VIEW_HEIGHT),
             ).flatMap {
                 listOf(
                     Pair(0, it.second),
@@ -180,8 +209,70 @@ class WindowAnchorStrategyTest {
                     WindowAnchorStrategy(anchorParameter).apply(prevAttrs)
                 Assert.assertEquals(
                     "anchor on (${it.first}, ${it.second}) with device(${parameters.getRootRect()})",
-                    screenHeight - BOTTOM_BAR_HEIGHT - WINDOW_HEIGHT - ANCHOR_VIEW_HEIGHT,
-                    newAttrs.y
+                    screenBottom - ANCHOR_VIEW_HEIGHT - WINDOW_HEIGHT,
+                    newAttrs.y + STATUS_BAR_HEIGHT
+                )
+            }
+        }
+    }
+
+    @Test
+    fun testReducer_AnchorOnOuterBottom() {
+        testAllDevice { parameters, screenWidth, screenHeight ->
+            val screenBottom = screenHeight - BOTTOM_BAR_HEIGHT
+            listOf(
+                Pair(0, screenBottom - ANCHOR_VIEW_HEIGHT + 1),
+                Pair(0, screenBottom - ANCHOR_VIEW_HEIGHT / 2),
+                Pair(0, screenBottom),
+                Pair(0, screenBottom + WINDOW_HEIGHT / 2),
+                Pair(0, screenBottom + WINDOW_HEIGHT),
+            ).flatMap {
+                listOf(
+                    Pair(0, it.second),
+                    Pair(screenWidth / 2, it.second),
+                    Pair(screenWidth, it.second),
+                )
+            }.forEach {
+                val anchorParameter =
+                    AnchorParameter(parameters, it.first, it.second)
+                val prevAttrs = WindowManager.LayoutParams()
+                val newAttrs =
+                    WindowAnchorStrategy(anchorParameter).apply(prevAttrs)
+                Assert.assertEquals(
+                    "anchor on (${it.first}, ${it.second}) with device(${parameters.getRootRect()})",
+                    anchorParameter.y
+                        .coerceAtMost(screenBottom) - WINDOW_HEIGHT,
+                    newAttrs.y + STATUS_BAR_HEIGHT
+                )
+            }
+        }
+    }
+
+    @Test
+    fun testReducer_AnchorShowAsBelow() {
+        testAllDevice { parameters, screenWidth, screenHeight ->
+            val screenBottom = screenHeight - BOTTOM_BAR_HEIGHT
+            listOf(
+                Pair(0, screenBottom - ANCHOR_VIEW_HEIGHT),
+                Pair(0, screenBottom - ANCHOR_VIEW_HEIGHT - WINDOW_HEIGHT / 2),
+                Pair(0, screenBottom - ANCHOR_VIEW_HEIGHT - WINDOW_HEIGHT + 1)
+            ).flatMap {
+                listOf(
+                    Pair(0, it.second),
+                    Pair(screenWidth / 2, it.second),
+                    Pair(screenWidth, it.second),
+                )
+            }.forEach {
+                val anchorParameter =
+                    AnchorParameter(parameters, it.first, it.second)
+                val prevAttrs = WindowManager.LayoutParams()
+                val newAttrs =
+                    WindowAnchorStrategy(anchorParameter).apply(prevAttrs)
+                Assert.assertEquals(
+                    "anchor on (${it.first}, ${it.second}) with device(${parameters.getRootRect()})",
+                    anchorParameter.y.coerceAtMost(screenBottom)
+                            - WINDOW_HEIGHT,
+                    newAttrs.y + STATUS_BAR_HEIGHT
                 )
             }
         }
