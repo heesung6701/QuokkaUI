@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CustomAlertDialog" parent="android:Theme.DeviceDefault.Light.Dialog.Alert">
+    </style>
+
+    <style name="CustomAlertDialog.Small" parent="CustomAlertDialog">
+        <item name="android:windowMinWidthMajor">@dimen/small_dialog_width_on_landscape</item>
+        <item name="android:windowMinWidthMinor">@dimen/small_dialog_width_on_portrait</item>
+    </style>
+
+    <style name="CustomPopupWindow">
+        <item name="android:windowMinWidthMajor">@dimen/small_window_width_on_landscape</item>
+        <item name="android:windowMinWidthMinor">@dimen/small_window_width_on_portrait</item>
+    </style>
+</resources>

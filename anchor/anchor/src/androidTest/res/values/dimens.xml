@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="small_window_width_on_landscape">180dp</dimen>
+    <dimen name="small_window_width_on_portrait">100dp</dimen>
+
+    <dimen name="small_dialog_width_on_landscape">380dp</dimen>
+    <dimen name="small_dialog_width_on_portrait">300dp</dimen>
+</resources>

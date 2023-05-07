@@ -6,13 +6,13 @@ import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.github.heesung6701.quokkaui.catalog.common.findAllViews
-import com.github.heesung6701.quokkaui.anchor.window.WindowAnchorManager
+import com.github.heesung6701.quokkaui.anchor.window.WindowAnchorHelper
 import com.github.heesung6701.quokkaui.catalog.R
+import com.github.heesung6701.quokkaui.catalog.common.findAllViews
 import java.util.*
 
 class DialogAnchorActivity : AppCompatActivity() {
-    private var anchorManager: WindowAnchorManager? = null
+    private var anchorHelper: WindowAnchorHelper = WindowAnchorHelper()
     companion object {
         const val PERIOD = 1000L
     }
@@ -44,12 +44,11 @@ class DialogAnchorActivity : AppCompatActivity() {
                 timer?.cancel()
             }
             .create()
-        anchorManager = WindowAnchorManager(dialog.window!!)
 
         val buttons = findAllViews { it is Button }
         buttons.forEach {
             it.setOnClickListener { view ->
-                anchorManager?.attach(view)
+                anchorHelper.attach(dialog.window!!, it)
                 dialog.show()
 
                 if (view.id == R.id.btnRandom) {

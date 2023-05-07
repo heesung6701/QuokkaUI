@@ -1,0 +1,71 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="0,1,2"
+    tools:context=".ButtonOnBorderTestActivity">
+
+    <TableRow android:layout_weight="1">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="btnTopLeft"
+            android:text="btn1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="btnTopMid"
+            android:text="btn2" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="btnTopRight"
+            android:text="btn3" />
+    </TableRow>
+
+    <TableRow android:layout_weight="1">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="btnMidLeft"
+            android:text="btn4" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="btnCenter"
+            android:text="btn5" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="btnMidRight"
+            android:text="btn6" />
+    </TableRow>
+
+    <TableRow>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="btnBottomLeft"
+            android:text="btn7" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="btnBottomMid"
+            android:text="btn8" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="btnBottomRight"
+            android:text="btn9" />
+    </TableRow>
+</TableLayout>

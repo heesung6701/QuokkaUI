@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <activity
+            android:name="com.github.heesung6701.quokkaui.anchor.ButtonOnBorderTestActivity"
+            android:configChanges="orientation|screenSize|screenLayout"
+            android:exported="true" />
+
+        <activity
+            android:name="com.github.heesung6701.quokkaui.anchor.DynamicButtonTestActivity"
+            android:configChanges="orientation|screenSize|screenLayout"
+            android:exported="true" />
+    </application>
+</manifest>
