@@ -7,7 +7,9 @@ abstract class AbstractAnchorStrategy {
     fun apply(
         windowParams: WindowManager.LayoutParams,
     ): WindowManager.LayoutParams {
-        return with(windowParams, reducer())
+        val prevParams = WindowManager.LayoutParams()
+        prevParams.copyFrom(windowParams)
+        return with(prevParams, reducer())
     }
 
     abstract fun reducer(): WindowManager.LayoutParams.() -> WindowManager.LayoutParams
