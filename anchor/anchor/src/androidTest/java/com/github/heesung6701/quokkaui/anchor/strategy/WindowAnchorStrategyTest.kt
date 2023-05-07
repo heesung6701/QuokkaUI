@@ -278,6 +278,21 @@ class WindowAnchorStrategyTest {
         }
     }
 
+    @Test
+    fun testReducer_NotUpdatePrevParams() {
+        val prevAttrs = WindowManager.LayoutParams()
+        WindowAnchorStrategy(PhoneParameter()).apply(prevAttrs)
+        Assert.assertEquals(
+            0,
+            prevAttrs.x
+        )
+        Assert.assertEquals(
+            0,
+            prevAttrs.y
+        )
+    }
+
+
     private fun testAllDevice(onParameter: (params: WindowAnchorStrategy.Parameters, w: Int, h: Int) -> Unit) {
         listOf(
             PhoneParameter(),
