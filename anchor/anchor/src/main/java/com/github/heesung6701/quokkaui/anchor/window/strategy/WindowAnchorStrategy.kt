@@ -27,10 +27,10 @@ open class WindowAnchorStrategy(private val anchorParams: Parameters) : Abstract
             showAsBelow(window, anchor)
         }
         return {
-            x = (anchor.centerX() - window.width() / 2)
-                .coerceIn(root.left, root.right - window.width())
-            y = (anchor.bottom - getRootRect().top)
-                .coerceIn(root.top, root.bottom - window.height() - anchor.height())
+            x = (pos.first - root.left)
+                .coerceIn(0, root.width() - window.width())
+            y = (pos.second - root.top)
+                .coerceIn(0, root.height() - window.height())
             gravity = Gravity.LEFT or Gravity.TOP
             this
         }
