@@ -20,6 +20,12 @@ open class WindowAnchorStrategy(private val anchorParams: Parameters) : Abstract
         val window = getWindowRect()
         val root = getRootRect()
 
+        val isShowAboveAnchorView = anchor.bottom + window.height() > root.bottom
+        val pos = if (isShowAboveAnchorView) {
+            showAsAbove(window, anchor)
+        } else {
+            showAsBelow(window, anchor)
+        }
         return {
             x = (anchor.centerX() - window.width() / 2)
                 .coerceIn(root.left, root.right - window.width())
@@ -28,6 +34,18 @@ open class WindowAnchorStrategy(private val anchorParams: Parameters) : Abstract
             gravity = Gravity.LEFT or Gravity.TOP
             this
         }
+    }
+
+    private fun showAsAbove(window: Rect, anchor: Rect): Pair<Int, Int> {
+        val x = (anchor.centerX() - window.width() / 2)
+        val y = (anchor.top - window.height())
+        return Pair(x, y)
+    }
+
+    private fun showAsBelow(window: Rect, anchor: Rect): Pair<Int, Int> {
+        val x = (anchor.centerX() - window.width() / 2)
+        val y = anchor.bottom
+        return Pair(x, y)
     }
 
     interface Parameters {
