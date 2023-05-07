@@ -19,7 +19,7 @@ class WindowAnchorConnector(val window: Window, val anchor: View) {
     }
 
     private var strategy: AbstractAnchorStrategy =
-        WindowAnchorStrategy(WindowAnchorStrategy.Parameters(window, anchor))
+        WindowAnchorStrategy(WindowAnchorStrategy.ParametersImpl(window, anchor))
 
     private val originalWindowCallBack: Window.Callback = window.callback
 

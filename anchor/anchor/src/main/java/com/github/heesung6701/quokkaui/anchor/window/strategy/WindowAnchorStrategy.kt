@@ -20,34 +20,35 @@ open class WindowAnchorStrategy(private val anchorParams: Parameters) : Abstract
         val window = getWindowRect()
         val root = getRootRect()
 
-        val isShowAboveAnchorView = anchor.bottom + window.height() > root.bottom
-        val offset = if (isShowAboveAnchorView) {
-            -window.height() - anchor.height()
-        } else {
-            0
-        }
-
         return {
             x = (anchor.centerX() - window.width() / 2)
                 .coerceIn(root.left, root.right - window.width())
-            y = (anchor.bottom + offset - getSystemInsets().top)
-                .coerceIn(root.top, root.bottom - window.height())
+            y = (anchor.bottom - getRootRect().top)
+                .coerceIn(root.top, root.bottom - window.height() - anchor.height())
             gravity = Gravity.LEFT or Gravity.TOP
             this
         }
     }
 
-    data class Parameters(private val window: Window, private val anchor: View) {
+    interface Parameters {
+        fun getWindowRect(): Rect
 
-        fun getWindowRect(): Rect = Rect().apply {
+        fun getAnchorRect(): Rect
+
+        fun getRootRect(): Rect
+    }
+
+    data class ParametersImpl(private val window: Window, private val anchor: View) : Parameters {
+
+        override fun getWindowRect(): Rect = Rect().apply {
             window.decorView.getGlobalVisibleRect(this)
         }
 
-        fun getAnchorRect(): Rect = Rect().apply {
+        override fun getAnchorRect(): Rect = Rect().apply {
             anchor.getGlobalVisibleRect(this)
         }
 
-        fun getRootRect(): Rect {
+        override fun getRootRect(): Rect {
             val rootRect = Rect().apply {
                 anchor.rootView.getGlobalVisibleRect(this)
             }
@@ -59,7 +60,7 @@ open class WindowAnchorStrategy(private val anchorParams: Parameters) : Abstract
             return rootRect
         }
 
-        fun getSystemInsets(): Insets {
+        private fun getSystemInsets(): Insets {
             return ViewCompat.getRootWindowInsets(anchor)
                 ?.getInsets(WindowInsetsCompat.Type.systemBars()) ?: Insets.NONE
         }
