@@ -8,6 +8,7 @@ composeCompiler = "1.4.4" # https://developer.android.com/jetpack/androidx/relea
 espresso = "3.5.1"
 kotlin = "1.8.10"
 junit = "4.13"
+recyclerview = "1.2.1"
 uiautomator = "2.2.0"
 
 [libraries]
@@ -18,6 +19,7 @@ androidxAnnotationJvm = { module = "androidx.annotation:annotation-jvm", version
 androidxCore = { module = "androidx.core:core", version.ref = "core" }
 androidxCoreKtx = { module = "androidx.core:core-ktx", version.ref = "core" }
 androidxComposeCompiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeCompiler" }
+androidxRecyclerView = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
 androidxTestUiAutomator = { module = "androidx.test.uiautomator:uiautomator", version.ref = "uiautomator"}
 espressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 junit = { module = "junit:junit", version.ref = "junit" }

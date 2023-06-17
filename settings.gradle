@@ -21,3 +21,4 @@ rootProject.name = "QukkaUI"
 include ':catalog'
 include ':touchdelegate:touchdelegate'
 include ':anchor:anchor'
+include ':picker:component'
