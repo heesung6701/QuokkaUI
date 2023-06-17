@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -43,6 +44,8 @@ dependencies {
 
     implementation(libs.androidxCoreKtx)
     implementation(libs.androidxRecyclerView)
+    implementation(libs.androidxConstraintLayout)
+    implementation(libs.coroutinesAndroid)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.testExtJunit)
