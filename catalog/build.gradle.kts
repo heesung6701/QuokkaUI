@@ -50,6 +50,7 @@ dependencies {
     } else {
         implementation(project(":touchdelegate:touchdelegate"))
         implementation(project(":anchor:anchor"))
+        implementation(project(":picker:component"))
     }
 
     implementation("androidx.appcompat:appcompat:1.6.1")

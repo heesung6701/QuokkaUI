@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.github.heesung6701.quokkaui.catalog.anchor.window.DialogAnchorActivity
+import com.github.heesung6701.quokkaui.catalog.picker.ComponentPickerActivity
 import com.github.heesung6701.quokkaui.catalog.touchdelegate.TouchDelegateActivity
 
 class MainActivity : AppCompatActivity() {
@@ -35,6 +36,10 @@ class MainActivity : AppCompatActivity() {
                 getString(R.string.title_activity_dialog_anchor),
                 DialogAnchorActivity::class.java
             ),
+            CatalogItemData(
+                "ComponentPicker Test",
+                ComponentPickerActivity::class.java
+            )
         )
         setContent {
             MaterialTheme {

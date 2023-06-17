@@ -9,6 +9,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuokkaUI">
         <activity
+            android:name=".picker.ComponentPickerActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -19,15 +22,13 @@
         </activity>
         <activity
             android:name=".touchdelegate.TouchDelegateActivity"
-            android:title="@string/title_activity_touch_delegate"
             android:exported="true"
-            />
+            android:title="@string/title_activity_touch_delegate" />
         <activity
             android:name=".anchor.window.DialogAnchorActivity"
-            android:title="@string/title_activity_dialog_anchor"
-            android:exported="true"
             android:configChanges="screenSize|orientation"
-            />
+            android:exported="true"
+            android:title="@string/title_activity_dialog_anchor" />
     </application>
 
 </manifest>
