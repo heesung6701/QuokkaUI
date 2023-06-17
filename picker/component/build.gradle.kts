@@ -5,14 +5,14 @@ plugins {
 
 android {
     namespace = "com.github.heesung6701.quokkaui.picker"
-    compileSdk = 33
+    compileSdkVersion = quokkaui.build.SupportConfig.COMPILE_SDK_VERSION
+    buildToolsVersion = quokkaui.build.SupportConfig.BUILD_TOOLS_VERSION
 
     defaultConfig {
-        minSdk = 24
-        targetSdk = 33
+        minSdk = quokkaui.build.SupportConfig.DEFAULT_MIN_SDK_VERSION
+        targetSdk = quokkaui.build.SupportConfig.TARGET_SDK_VERSION
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
+        testInstrumentationRunner = quokkaui.build.SupportConfig.INSTRUMENTATION_RUNNER
     }
 
     buildTypes {
@@ -28,6 +28,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
