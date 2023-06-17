@@ -3,7 +3,6 @@ package com.github.heesung6701.quokkaui.touchdelegate
 import android.graphics.Rect
 import android.graphics.Region
 import android.os.Build
-import android.util.ArrayMap
 import android.view.MotionEvent
 import android.view.TouchDelegate
 import android.view.View
@@ -29,23 +28,12 @@ class TouchDelegateSet(private val anchorView: View) : TouchDelegate(Rect(), anc
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onTouchExplorationHoverEvent(event: MotionEvent): Boolean {
-        return touchDelegateSet.fold(false) { acc: Boolean, cur: CapturedTouchDelegate ->
-            acc or cur.onTouchExplorationHoverEvent(event)
-        }
+        return false
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun getTouchDelegateInfo(): AccessibilityNodeInfo.TouchDelegateInfo {
-        if (touchDelegateSet.size == 0) {
-            return AccessibilityNodeInfo.TouchDelegateInfo(hashMapOf(Pair(Region(), anchorView)))
-        }
-        val targetMap: ArrayMap<Region, View> = ArrayMap(touchDelegateSet.size)
-        touchDelegateSet.forEach {
-            it.apply {
-                targetMap[Region(bounds)] = delegateView
-            }
-        }
-        return AccessibilityNodeInfo.TouchDelegateInfo(targetMap)
+        return AccessibilityNodeInfo.TouchDelegateInfo(hashMapOf(Pair(Region(), anchorView)))
     }
 
     class Builder(private val anchorView: View) {
