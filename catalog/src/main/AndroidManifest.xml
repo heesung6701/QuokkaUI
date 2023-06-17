@@ -9,9 +9,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuokkaUI">
         <activity
-            android:name=".picker.ComponentPickerActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -29,6 +26,10 @@
             android:configChanges="screenSize|orientation"
             android:exported="true"
             android:title="@string/title_activity_dialog_anchor" />
+        <activity
+            android:name=".picker.ComponentPickerActivity"
+            android:exported="true"
+            android:title="@string/title_activity_picker_component" />
     </application>
 
 </manifest>

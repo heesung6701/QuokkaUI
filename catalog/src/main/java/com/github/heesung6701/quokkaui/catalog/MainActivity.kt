@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                 DialogAnchorActivity::class.java
             ),
             CatalogItemData(
-                "ComponentPicker Test",
+                getString(R.string.title_activity_picker_component),
                 ComponentPickerActivity::class.java
             )
         )
