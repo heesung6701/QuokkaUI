@@ -30,7 +30,7 @@ class AppInfoListAdapter : ListAdapter<AppInfoViewModel, AppInfoViewHolder>(Diff
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppInfoViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ListItemAppInfoBinding.inflate(inflater)
+        val binding = ListItemAppInfoBinding.inflate(inflater, parent, false)
         return AppInfoViewHolder(binding)
     }
 
