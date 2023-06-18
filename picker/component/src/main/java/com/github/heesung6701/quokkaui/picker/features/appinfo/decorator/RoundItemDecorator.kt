@@ -1,4 +1,4 @@
-package com.github.heesung6701.quokkaui.picker.appinfo.decorator
+package com.github.heesung6701.quokkaui.picker.features.appinfo.decorator
 
 import android.graphics.Rect
 import android.view.View

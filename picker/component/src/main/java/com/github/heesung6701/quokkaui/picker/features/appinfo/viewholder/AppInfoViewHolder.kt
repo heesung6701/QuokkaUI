@@ -1,7 +1,7 @@
-package com.github.heesung6701.quokkaui.picker.appinfo.viewholder
+package com.github.heesung6701.quokkaui.picker.features.appinfo.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
-import com.github.heesung6701.quokkaui.picker.appinfo.viewmodel.AppInfoViewModel
+import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoViewModel
 import com.github.heesung6701.quokkaui.picker.databinding.ListItemAppInfoBinding
 import com.github.heesung6701.quokkaui.picker.extend.loadIcon
 

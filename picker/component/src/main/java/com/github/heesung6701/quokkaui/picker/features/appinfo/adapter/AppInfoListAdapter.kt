@@ -1,11 +1,11 @@
-package com.github.heesung6701.quokkaui.picker.appinfo.adapter
+package com.github.heesung6701.quokkaui.picker.features.appinfo.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.github.heesung6701.quokkaui.picker.appinfo.viewholder.AppInfoViewHolder
-import com.github.heesung6701.quokkaui.picker.appinfo.viewmodel.AppInfoViewModel
+import com.github.heesung6701.quokkaui.picker.features.appinfo.viewholder.AppInfoViewHolder
+import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoViewModel
 import com.github.heesung6701.quokkaui.picker.databinding.ListItemAppInfoBinding
 
 class AppInfoListAdapter : ListAdapter<AppInfoViewModel, AppInfoViewHolder>(DiffUtils) {

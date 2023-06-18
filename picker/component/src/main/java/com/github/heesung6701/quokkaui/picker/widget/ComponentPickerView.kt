@@ -4,10 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.heesung6701.quokkaui.picker.appinfo.adapter.AppInfoListAdapter
-import com.github.heesung6701.quokkaui.picker.appinfo.data.AppInfo
-import com.github.heesung6701.quokkaui.picker.appinfo.decorator.RoundItemDecorator
-import com.github.heesung6701.quokkaui.picker.appinfo.viewmodel.ViewModelFactory
+import com.github.heesung6701.quokkaui.picker.features.appinfo.adapter.AppInfoListAdapter
+import com.github.heesung6701.quokkaui.picker.features.appinfo.data.AppInfo
+import com.github.heesung6701.quokkaui.picker.features.appinfo.decorator.RoundItemDecorator
+import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewModelFactory
 
 class ComponentPickerView @JvmOverloads constructor(
     context: Context,
@@ -17,7 +17,8 @@ class ComponentPickerView @JvmOverloads constructor(
 
     private val appInfoListAdapter = AppInfoListAdapter()
 
-    private val viewModelFactory = ViewModelFactory(context)
+    private val viewModelFactory =
+        ViewModelFactory(context)
 
     init {
         layoutManager = LinearLayoutManager(context)

@@ -1,4 +1,4 @@
-package com.github.heesung6701.quokkaui.picker.appinfo.viewmodel
+package com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel
 
 import android.content.ComponentName
 import android.content.Context
@@ -6,7 +6,7 @@ import android.content.pm.PackageManager.NameNotFoundException
 import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import com.github.heesung6701.quokkaui.picker.R
-import com.github.heesung6701.quokkaui.picker.appinfo.data.AppInfo
+import com.github.heesung6701.quokkaui.picker.features.appinfo.data.AppInfo
 import kotlinx.coroutines.flow.flow
 
 class ViewModelFactory(val context: Context) {

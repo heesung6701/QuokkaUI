@@ -2,7 +2,7 @@ package com.github.heesung6701.quokkaui.picker.helper
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import com.github.heesung6701.quokkaui.picker.appinfo.data.AppInfo
+import com.github.heesung6701.quokkaui.picker.features.appinfo.data.AppInfo
 
 object AppInfoHelper {
 
