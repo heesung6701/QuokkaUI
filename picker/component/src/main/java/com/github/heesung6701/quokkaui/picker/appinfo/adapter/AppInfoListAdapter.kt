@@ -34,6 +34,14 @@ class AppInfoListAdapter : ListAdapter<AppInfoViewModel, AppInfoViewHolder>(Diff
         return AppInfoViewHolder(binding)
     }
 
+    override fun onBindViewHolder(
+        holder: AppInfoViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        super.onBindViewHolder(holder, position, payloads)
+    }
+
     override fun onBindViewHolder(holder: AppInfoViewHolder, position: Int) {
         val viewModel = getItem(position)
         holder.bindData(viewModel)

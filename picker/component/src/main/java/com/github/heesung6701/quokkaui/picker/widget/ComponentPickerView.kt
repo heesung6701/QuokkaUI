@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.heesung6701.quokkaui.picker.appinfo.adapter.AppInfoListAdapter
 import com.github.heesung6701.quokkaui.picker.appinfo.data.AppInfo
+import com.github.heesung6701.quokkaui.picker.appinfo.decorator.RoundItemDecorator
 import com.github.heesung6701.quokkaui.picker.appinfo.viewmodel.ViewModelFactory
 
 class ComponentPickerView @JvmOverloads constructor(
@@ -21,6 +22,7 @@ class ComponentPickerView @JvmOverloads constructor(
     init {
         layoutManager = LinearLayoutManager(context)
         adapter = appInfoListAdapter
+        addItemDecoration(RoundItemDecorator())
     }
 
     fun submitList(items: List<AppInfo>) {
