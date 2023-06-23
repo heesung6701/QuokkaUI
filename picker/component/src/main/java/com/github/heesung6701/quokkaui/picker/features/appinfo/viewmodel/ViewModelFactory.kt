@@ -28,7 +28,7 @@ class ViewModelFactory(val context: Context) {
                 packageManager.getActivityInfo(
                     ComponentName(appInfo.packageName, appInfo.activityName),
                     0
-                ).name
+                ).loadLabel(packageManager).toString()
             } catch (e: NameNotFoundException) {
                 "Unknown"
             }
