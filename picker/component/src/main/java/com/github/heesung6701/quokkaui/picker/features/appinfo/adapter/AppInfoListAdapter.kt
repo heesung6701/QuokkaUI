@@ -8,7 +8,7 @@ import com.github.heesung6701.quokkaui.picker.features.appinfo.viewholder.AppInf
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoViewModel
 import com.github.heesung6701.quokkaui.picker.databinding.ListItemAppInfoBinding
 
-class AppInfoListAdapter : ListAdapter<AppInfoViewModel, AppInfoViewHolder>(DiffUtils) {
+class AppInfoListAdapter(val onItemClick: (AppInfoViewModel) -> Unit) : ListAdapter<AppInfoViewModel, AppInfoViewHolder>(DiffUtils) {
 
     companion object {
         val DiffUtils = object : DiffUtil.ItemCallback<AppInfoViewModel>() {
@@ -39,7 +39,11 @@ class AppInfoListAdapter : ListAdapter<AppInfoViewModel, AppInfoViewHolder>(Diff
         position: Int,
         payloads: MutableList<Any>
     ) {
+        val item = getItem(position)
         super.onBindViewHolder(holder, position, payloads)
+        holder.itemView.setOnClickListener {
+            onItemClick(item)
+        }
     }
 
     override fun onBindViewHolder(holder: AppInfoViewHolder, position: Int) {

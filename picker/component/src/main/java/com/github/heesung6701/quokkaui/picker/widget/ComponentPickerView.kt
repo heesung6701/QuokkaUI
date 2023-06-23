@@ -15,10 +15,18 @@ class ComponentPickerView @JvmOverloads constructor(
     defStyleAttr: Int = android.R.attr.textViewStyle,
 ) : RecyclerView(context, attrs, defStyleAttr) {
 
-    private val appInfoListAdapter = AppInfoListAdapter()
+    interface OnItemClickedListener {
+        fun onItemClicked(appInfo: AppInfo)
+    }
+
+    private val appInfoListAdapter = AppInfoListAdapter(onItemClick = {
+        onItemClickedListener?.onItemClicked(it.key)
+    })
 
     private val viewModelFactory =
         ViewModelFactory(context)
+
+    private var onItemClickedListener: OnItemClickedListener? = null
 
     init {
         layoutManager = LinearLayoutManager(context)
@@ -30,5 +38,9 @@ class ComponentPickerView @JvmOverloads constructor(
         appInfoListAdapter.submitList(items.map {
             viewModelFactory.createAppInfoViewModel(it)
         })
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickedListener) {
+        onItemClickedListener = listener
     }
 }
