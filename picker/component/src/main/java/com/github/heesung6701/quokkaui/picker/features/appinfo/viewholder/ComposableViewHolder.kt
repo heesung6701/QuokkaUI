@@ -4,7 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.github.heesung6701.quokkaui.picker.databinding.ListItemAppInfoFrameBinding
 import com.github.heesung6701.quokkaui.picker.features.appinfo.data.comoposable.ComposableType
-import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoViewModel
+import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewModel
 
 class ComposableViewHolder(binding: ListItemAppInfoFrameBinding, composableType: ComposableType) : RecyclerView.ViewHolder(binding.root) {
 
@@ -25,7 +25,7 @@ class ComposableViewHolder(binding: ListItemAppInfoFrameBinding, composableType:
         }
     }
 
-    fun bindData(viewModel: AppInfoViewModel) {
+    fun bindData(viewModel: ViewModel) {
         composableItemViewHolderList.forEach {
             it.bindData(viewModel)
         }

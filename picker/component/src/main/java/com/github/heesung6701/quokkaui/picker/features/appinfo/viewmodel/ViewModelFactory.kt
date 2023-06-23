@@ -13,7 +13,16 @@ class ViewModelFactory(val context: Context) {
 
     private val packageManager = context.packageManager
 
-    fun createAppInfoViewModel(appInfo: AppInfo): AppInfoViewModel {
+    fun createAppInfoViewModel(appInfo: AppInfo): ViewModel {
+        if (appInfo.subTitle != null) {
+            return AppInfoSubTitleViewModel(appInfo,
+                appName = getDefaultLabel(appInfo),
+                appIcon = flow {
+                    emit(getDefaultIcon(appInfo))
+                },
+                subTitle = appInfo.subTitle!!
+            )
+        }
         return AppInfoViewModel(appInfo,
             appName = getDefaultLabel(appInfo),
             appIcon = flow {

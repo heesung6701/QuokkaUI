@@ -6,5 +6,6 @@ enum class ComposableTypeSet(
     override val titleFrame: TitleFrame,
     override val rightFrame: ComposableFrame?
 ) : ComposableType {
-    SingleTextLine(null, IconFrame.Icon, TitleFrame.SingleLine, null)
+    SingleTextLine(null, IconFrame.Icon, TitleFrame.SingleLine, null),
+    TwoTextLine(null, IconFrame.Icon, TitleFrame.TwoLine, null)
 }

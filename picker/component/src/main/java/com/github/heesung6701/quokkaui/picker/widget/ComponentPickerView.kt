@@ -20,7 +20,7 @@ class ComponentPickerView @JvmOverloads constructor(
     }
 
     private val appInfoListAdapter = AppInfoListAdapter(onItemClick = {
-        onItemClickedListener?.onItemClicked(it.key)
+        onItemClickedListener?.onItemClicked(it)
     })
 
     private val viewModelFactory =

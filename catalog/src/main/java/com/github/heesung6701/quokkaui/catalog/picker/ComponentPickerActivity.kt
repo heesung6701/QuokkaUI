@@ -14,7 +14,12 @@ class ComponentPickerActivity : AppCompatActivity() {
         val binding = ActivityComponentPickerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val appInfoList = AppInfoHelper.getInstalledPackages(packageManager)
+        val appInfoList = AppInfoHelper.getInstalledPackages(packageManager).mapIndexed { index, appInfo ->
+            if (index % 3 == 0) {
+                appInfo.subTitle = "idx - $index"
+            }
+            appInfo
+        }
         binding.componentPicker.apply {
             submitList(appInfoList)
             setOnItemClickListener(object: ComponentPickerView.OnItemClickedListener {

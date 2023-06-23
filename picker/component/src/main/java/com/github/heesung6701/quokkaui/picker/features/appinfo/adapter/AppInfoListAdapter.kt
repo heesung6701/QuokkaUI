@@ -5,24 +5,27 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.github.heesung6701.quokkaui.picker.databinding.ListItemAppInfoFrameBinding
+import com.github.heesung6701.quokkaui.picker.features.appinfo.data.AppInfo
 import com.github.heesung6701.quokkaui.picker.features.appinfo.data.comoposable.ComposableTypeSet
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewholder.ComposableViewHolder
+import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoSubTitleViewModel
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoViewModel
+import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewModel
 
-class AppInfoListAdapter(val onItemClick: (AppInfoViewModel) -> Unit) : ListAdapter<AppInfoViewModel, ComposableViewHolder>(DiffUtils) {
+class AppInfoListAdapter(val onItemClick: (AppInfo) -> Unit) : ListAdapter<ViewModel, ComposableViewHolder>(DiffUtils) {
 
     companion object {
-        val DiffUtils = object : DiffUtil.ItemCallback<AppInfoViewModel>() {
+        val DiffUtils = object : DiffUtil.ItemCallback<ViewModel>() {
             override fun areItemsTheSame(
-                oldItem: AppInfoViewModel,
-                newItem: AppInfoViewModel
+                oldItem: ViewModel,
+                newItem: ViewModel
             ): Boolean {
                 return oldItem.key == newItem.key
             }
 
             override fun areContentsTheSame(
-                oldItem: AppInfoViewModel,
-                newItem: AppInfoViewModel
+                oldItem: ViewModel,
+                newItem: ViewModel
             ): Boolean {
                 return oldItem.key == newItem.key
             }
@@ -45,7 +48,9 @@ class AppInfoListAdapter(val onItemClick: (AppInfoViewModel) -> Unit) : ListAdap
         val item = getItem(position)
         holder.bindData(item)
         holder.itemView.setOnClickListener {
-            onItemClick(item)
+            if (item is AppInfoViewModel || item is AppInfoSubTitleViewModel) {
+                onItemClick(item.key as AppInfo)
+            }
         }
     }
 
@@ -55,6 +60,14 @@ class AppInfoListAdapter(val onItemClick: (AppInfoViewModel) -> Unit) : ListAdap
     }
 
     override fun getItemViewType(position: Int): Int {
-        return ComposableTypeSet.SingleTextLine.ordinal
+
+        return when(getItem(position)) {
+            is AppInfoSubTitleViewModel -> {
+                ComposableTypeSet.TwoTextLine.ordinal
+            }
+            else -> {
+                ComposableTypeSet.SingleTextLine.ordinal
+            }
+        }
     }
 }
