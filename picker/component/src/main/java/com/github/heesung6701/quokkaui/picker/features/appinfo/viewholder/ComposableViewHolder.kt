@@ -1,0 +1,33 @@
+package com.github.heesung6701.quokkaui.picker.features.appinfo.viewholder
+
+import android.view.View
+import androidx.recyclerview.widget.RecyclerView
+import com.github.heesung6701.quokkaui.picker.databinding.ListItemAppInfoFrameBinding
+import com.github.heesung6701.quokkaui.picker.features.appinfo.data.comoposable.ComposableType
+import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoViewModel
+
+class ComposableViewHolder(binding: ListItemAppInfoFrameBinding, composableType: ComposableType) : RecyclerView.ViewHolder(binding.root) {
+
+    private val composableItemViewHolderList: List<ComposableItemViewHolder>
+
+    init {
+        composableItemViewHolderList = listOf(
+            composableType.leftFrame to binding.leftFrame,
+            composableType.rightFrame to binding.rightFrame,
+            composableType.titleFrame to binding.titleFrame,
+            composableType.iconFrame to binding.iconFrame,
+        ).mapNotNull { (type, viewStub) ->
+            type?:return@mapNotNull null
+            type.viewHolderClass.getDeclaredConstructor(View::class.java).newInstance(viewStub.run {
+                layoutResource = type.layoutResId
+                viewStub.inflate()
+            })
+        }
+    }
+
+    fun bindData(viewModel: AppInfoViewModel) {
+        composableItemViewHolderList.forEach {
+            it.bindData(viewModel)
+        }
+    }
+}
