@@ -4,6 +4,7 @@ import android.view.View
 import com.github.heesung6701.quokkaui.picker.databinding.LayoutAppInfoIconBinding
 import com.github.heesung6701.quokkaui.picker.extend.loadIcon
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoSubTitleViewModel
+import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoSwitchViewModel
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoViewModel
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewModel
 
@@ -17,6 +18,9 @@ class ComposableIconViewHolder(itemView: View) :
             binding.appIcon.loadIcon(viewModel.appIcon)
         }
         if (viewModel is AppInfoSubTitleViewModel) {
+            binding.appIcon.loadIcon(viewModel.appIcon)
+        }
+        if (viewModel is AppInfoSwitchViewModel) {
             binding.appIcon.loadIcon(viewModel.appIcon)
         }
     }

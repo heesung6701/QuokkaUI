@@ -14,15 +14,19 @@ class ComponentPickerActivity : AppCompatActivity() {
         val binding = ActivityComponentPickerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val appInfoList = AppInfoHelper.getInstalledPackages(packageManager).mapIndexed { index, appInfo ->
-            if (index % 3 == 0) {
-                appInfo.subTitle = "idx - $index"
+        val appInfoList =
+            AppInfoHelper.getInstalledPackages(packageManager).mapIndexed { index, appInfo ->
+                if (index % 3 == 0) {
+                    appInfo.subTitle = "idx - $index"
+                }
+                if (index % 6 == 0) {
+                    appInfo.activate = index % 12 == 0
+                }
+                appInfo
             }
-            appInfo
-        }
         binding.componentPicker.apply {
             submitList(appInfoList)
-            setOnItemClickListener(object: ComponentPickerView.OnItemClickedListener {
+            setOnItemClickListener(object : ComponentPickerView.OnItemClickedListener {
                 override fun onItemClicked(appInfo: AppInfo) {
                     Toast.makeText(context, appInfo.toString(), Toast.LENGTH_SHORT).show()
                 }

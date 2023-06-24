@@ -9,6 +9,7 @@ import com.github.heesung6701.quokkaui.picker.features.appinfo.data.AppInfo
 import com.github.heesung6701.quokkaui.picker.features.appinfo.data.comoposable.ComposableTypeSet
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewholder.ComposableViewHolder
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoSubTitleViewModel
+import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoSwitchViewModel
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoViewModel
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewModel
 
@@ -62,6 +63,9 @@ class AppInfoListAdapter(val onItemClick: (AppInfo) -> Unit) : ListAdapter<ViewM
     override fun getItemViewType(position: Int): Int {
 
         return when(getItem(position)) {
+            is AppInfoSwitchViewModel -> {
+                ComposableTypeSet.SwitchPreference.ordinal
+            }
             is AppInfoSubTitleViewModel -> {
                 ComposableTypeSet.TwoTextLine.ordinal
             }

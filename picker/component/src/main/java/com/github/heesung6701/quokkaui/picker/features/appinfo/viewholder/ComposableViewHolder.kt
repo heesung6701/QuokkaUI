@@ -6,7 +6,8 @@ import com.github.heesung6701.quokkaui.picker.databinding.ListItemAppInfoFrameBi
 import com.github.heesung6701.quokkaui.picker.features.appinfo.data.comoposable.ComposableType
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewModel
 
-class ComposableViewHolder(binding: ListItemAppInfoFrameBinding, composableType: ComposableType) : RecyclerView.ViewHolder(binding.root) {
+class ComposableViewHolder(binding: ListItemAppInfoFrameBinding, composableType: ComposableType) :
+    RecyclerView.ViewHolder(binding.root) {
 
     private val composableItemViewHolderList: List<ComposableItemViewHolder>
 
@@ -17,11 +18,13 @@ class ComposableViewHolder(binding: ListItemAppInfoFrameBinding, composableType:
             composableType.titleFrame to binding.titleFrame,
             composableType.iconFrame to binding.iconFrame,
         ).mapNotNull { (type, viewStub) ->
-            type?:return@mapNotNull null
-            type.viewHolderClass.getDeclaredConstructor(View::class.java).newInstance(viewStub.run {
-                layoutResource = type.layoutResId
-                viewStub.inflate()
-            })
+            type ?: return@mapNotNull null
+            type.viewHolderClass
+                .getDeclaredConstructor(View::class.java)
+                .newInstance(viewStub.run {
+                    layoutResource = type.layoutResId
+                    viewStub.inflate()
+                })
         }
     }
 
