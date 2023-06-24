@@ -7,7 +7,10 @@ import kotlinx.coroutines.flow.Flow
 data class AppInfoSwitchViewModel(
     override val key: AppInfo,
     val appName: String,
-    val subTitle: String,
-    val appIcon: Flow<Drawable>,
-    val activate: Boolean,
-) : ViewModel
+    override val subTitle: String,
+    override val appIcon: Flow<Drawable>,
+    override val activate: Boolean,
+) : ViewModel, HasTitle, HasSubTitle, HasSwitch, HasAppIcon {
+    override val title: String
+        get() = appName
+}

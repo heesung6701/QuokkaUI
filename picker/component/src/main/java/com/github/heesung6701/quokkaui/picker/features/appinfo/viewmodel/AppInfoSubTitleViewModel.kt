@@ -7,6 +7,9 @@ import kotlinx.coroutines.flow.Flow
 data class AppInfoSubTitleViewModel(
     override val key: AppInfo,
     val appName: String,
-    val appIcon: Flow<Drawable>,
-    val subTitle: String
-) : ViewModel
+    override val appIcon: Flow<Drawable>,
+    override val subTitle: String
+) : ViewModel, HasTitle, HasSubTitle, HasAppIcon {
+    override val title: String
+        get() = appName
+}
