@@ -16,7 +16,7 @@ class ComposableTitleTwoLineViewHolder(itemView: View) :
             binding.appName.text = viewModel.title
         }
         if (viewModel is HasSubTitle) {
-            binding.appName.text = viewModel.subTitle
+            binding.subTitle.text = viewModel.subTitle
         }
     }
 }
