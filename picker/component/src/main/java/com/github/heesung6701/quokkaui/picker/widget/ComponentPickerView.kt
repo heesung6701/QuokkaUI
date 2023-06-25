@@ -57,7 +57,7 @@ class ComponentPickerView @JvmOverloads constructor(
                     }
                 }
             }
-        })
+        }.toMutableList())
     }
 
     fun setOnItemClickListener(listener: OnItemClickedListener) {
@@ -65,5 +65,9 @@ class ComponentPickerView @JvmOverloads constructor(
     }
     fun setOnActivateChangeListener(listener: OnActivateChangeListener) {
         onActivateChangeListener = listener
+    }
+
+    fun setShowAllApps(showAllApps: Boolean) {
+        appInfoListAdapter.setShowAllApps(showAllApps)
     }
 }

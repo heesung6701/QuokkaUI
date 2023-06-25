@@ -25,6 +25,7 @@ class ComponentPickerActivity : AppCompatActivity() {
                 appInfo
             }
         binding.componentPicker.apply {
+            setShowAllApps(true)
             submitList(appInfoList)
             setOnItemClickListener(object : ComponentPickerView.OnItemClickedListener {
                 override fun onItemClicked(appInfo: AppInfo) {

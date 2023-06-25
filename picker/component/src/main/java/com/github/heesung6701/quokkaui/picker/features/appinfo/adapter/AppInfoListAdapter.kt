@@ -8,12 +8,20 @@ import com.github.heesung6701.quokkaui.picker.databinding.ListItemAppInfoFrameBi
 import com.github.heesung6701.quokkaui.picker.features.appinfo.data.AppInfo
 import com.github.heesung6701.quokkaui.picker.features.appinfo.data.comoposable.ComposableTypeSet
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewholder.ComposableViewHolder
+import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AllSwitchViewModel
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoSubTitleViewModel
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoSwitchViewModel
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoViewModel
+import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.HasSwitch
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-class AppInfoListAdapter(val onItemClick: (AppInfo) -> Unit) : ListAdapter<ViewModel, ComposableViewHolder>(DiffUtils) {
+class AppInfoListAdapter(val onItemClick: (AppInfo) -> Unit) :
+    ListAdapter<ViewModel, ComposableViewHolder>(DiffUtils) {
 
     companion object {
         val DiffUtils = object : DiffUtil.ItemCallback<ViewModel>() {
@@ -33,6 +41,8 @@ class AppInfoListAdapter(val onItemClick: (AppInfo) -> Unit) : ListAdapter<ViewM
         }
     }
 
+    private var showAllApps: Boolean = false
+    private var allSwitchViewModel: AllSwitchViewModel? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComposableViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ListItemAppInfoFrameBinding.inflate(inflater, parent, false)
@@ -61,17 +71,54 @@ class AppInfoListAdapter(val onItemClick: (AppInfo) -> Unit) : ListAdapter<ViewM
     }
 
     override fun getItemViewType(position: Int): Int {
+        return when (getItem(position)) {
+            is AllSwitchViewModel -> {
+                ComposableTypeSet.AllSwitch.ordinal
+            }
 
-        return when(getItem(position)) {
             is AppInfoSwitchViewModel -> {
                 ComposableTypeSet.SwitchPreference.ordinal
             }
+
             is AppInfoSubTitleViewModel -> {
                 ComposableTypeSet.TwoTextLine.ordinal
             }
+
             else -> {
                 ComposableTypeSet.SingleTextLine.ordinal
             }
         }
+    }
+
+    override fun submitList(list: MutableList<ViewModel>?) {
+        if (list == null) {
+            return super.submitList(null)
+        }
+        val newItemList = mutableListOf<ViewModel>()
+        if (showAllApps) {
+            allSwitchViewModel?.let {
+                newItemList.add(it)
+            }
+        }
+        newItemList.addAll(list)
+        super.submitList(newItemList)
+    }
+    fun setShowAllApps(showAllApps: Boolean) {
+        this.showAllApps = showAllApps
+        allSwitchViewModel = if (showAllApps) {
+            AllSwitchViewModel(MutableStateFlow(false).apply {
+                val activateFlow = this
+                CoroutineScope(Dispatchers.Main.immediate).launch {
+                    activateFlow.collect { allCheckState ->
+                        currentList.map {
+                            if (it is HasSwitch) {
+                                it.activateFlow.emit(allCheckState)
+                            }
+                        }
+                    }
+                }
+            })
+        } else null
+        notifyItemInserted(0)
     }
 }
