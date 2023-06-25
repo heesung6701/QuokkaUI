@@ -1,5 +1,7 @@
 package com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel
 
+import kotlinx.coroutines.flow.MutableStateFlow
+
 interface HasSwitch {
-    val activate: Boolean
+    val activateFlow: MutableStateFlow<Boolean>
 }

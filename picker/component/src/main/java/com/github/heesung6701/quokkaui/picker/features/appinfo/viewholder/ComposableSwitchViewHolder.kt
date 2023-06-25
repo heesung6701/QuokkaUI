@@ -4,6 +4,10 @@ import android.view.View
 import com.github.heesung6701.quokkaui.picker.databinding.LayoutAppInfoSwitchBinding
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.HasSwitch
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class ComposableSwitchViewHolder(itemView: View) : ComposableItemViewHolder(itemView) {
 
@@ -11,7 +15,16 @@ class ComposableSwitchViewHolder(itemView: View) : ComposableItemViewHolder(item
 
     override fun bindData(viewModel: ViewModel) {
         if (viewModel is HasSwitch) {
-            binding.switchActivate.isChecked = viewModel.activate
+            CoroutineScope(Dispatchers.Main.immediate).launch {
+                viewModel.activateFlow.collect {
+                    binding.switchActivate.isChecked = it
+                }
+            }
+            binding.switchActivate.setOnCheckedChangeListener { _, b ->
+                CoroutineScope(Dispatchers.Main.immediate).launch {
+                    viewModel.activateFlow.emit(b)
+                }
+            }
         }
     }
 }

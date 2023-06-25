@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import com.github.heesung6701.quokkaui.picker.R
 import com.github.heesung6701.quokkaui.picker.features.appinfo.data.AppInfo
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
 
 class ViewModelFactory(val context: Context) {
@@ -21,7 +22,7 @@ class ViewModelFactory(val context: Context) {
                     emit(getDefaultIcon(appInfo))
                 },
                 subTitle = appInfo.subTitle?:"",
-                activate = appInfo.activate!!
+                activateFlow = MutableStateFlow(appInfo.activate!!)
             )
         }
         if (appInfo.subTitle != null) {

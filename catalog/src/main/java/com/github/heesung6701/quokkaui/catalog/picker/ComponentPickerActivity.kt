@@ -31,6 +31,11 @@ class ComponentPickerActivity : AppCompatActivity() {
                     Toast.makeText(context, appInfo.toString(), Toast.LENGTH_SHORT).show()
                 }
             })
+            setOnActivateChangeListener(object : ComponentPickerView.OnActivateChangeListener {
+                override fun onActivateChanged(appInfo: AppInfo) {
+                    Toast.makeText(context, "${appInfo.packageName} is changed ${appInfo.activate}", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
     }
 }
