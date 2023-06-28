@@ -19,6 +19,12 @@ local.properties
 
 # build folder
 /**/build
+.transforms
+
+# outfiler
+.aar
+/out
+
 # Don't ignore src files under build package
 !**/src/**/build
 

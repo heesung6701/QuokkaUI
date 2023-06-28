@@ -19,5 +19,9 @@ gradlePlugin {
             id = "quiokkaui.build.QuokkaPlugin"
             implementationClass = "quokkaui.build.QuokkaPlugin"
         }
+        register("QuokkaRootPlugin") {
+            id = "quiokkaui.build.QuokkaRootPlugin"
+            implementationClass = "quokkaui.build.QuokkaRootPlugin"
+        }
     }
 }

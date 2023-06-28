@@ -1,0 +1,33 @@
+import groovy.lang.Tuple;
+
+def init = new Properties()
+ext.init = init
+
+def getOutDir(subdir = "") {
+    def outDir = System.env.OUT_DIR
+    def checkoutRoot = buildscript.sourceFile.parentFile.parent
+    def buildSrcOut
+    if (outDir == null) {
+        outDir = new File("${checkoutRoot}/out${subdir}")
+        buildSrcOut = new File("${checkoutRoot}/out/buildSrc")
+    } else {
+        outDir = new File(outDir)
+        buildSrcOut = new File("${outDir}/buildSrc")
+    }
+    return new Tuple(outDir, buildSrcOut)
+}
+
+def chooseOutDir(subdir = "") {
+    def (outDir, buildSrcOut) = getOutDir(subdir)
+    project.ext.buildSrcOut = buildSrcOut
+    project.ext.outDir = outDir
+    buildDir = new File(outDir, "$project.name/build")
+            .getCanonicalFile()
+    subprojects {
+        // Change buildDir first so that all plugins pick up the new value.
+        project.buildDir = new File("$project.parent.buildDir/../$project.name/build")
+    }
+}
+
+ext.init.getOutDir = this.&getOutDir
+ext.init.chooseOutDir = this.&chooseOutDir

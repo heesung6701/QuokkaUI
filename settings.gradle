@@ -17,6 +17,17 @@ dependencyResolutionManagement {
     }
 }
 
+apply from: "buildSrc/out.gradle"
+def (outDir, buildSrcOut) = init.getOutDir()
+
+getGradle().beforeProject {
+
+    it.ext.buildSrcOut = buildSrcOut
+    it.ext.outDir = outDir
+
+    it.buildDir = new File(outDir, "quokkaui/${it.path.replace(":", "/")}/build")
+}
+
 rootProject.name = "QukkaUI"
 include ':catalog'
 include ':touchdelegate:touchdelegate'
