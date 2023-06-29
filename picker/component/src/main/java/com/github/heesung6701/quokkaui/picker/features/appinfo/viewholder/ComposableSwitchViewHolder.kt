@@ -15,13 +15,13 @@ class ComposableSwitchViewHolder(itemView: View) : ComposableItemViewHolder(item
 
     override fun bindData(viewModel: ViewModel) {
         if (viewModel is HasSwitch) {
-            CoroutineScope(Dispatchers.Main.immediate).launch {
+            CoroutineScope(Dispatchers.Main).launch {
                 viewModel.activateFlow.collect {
                     binding.switchActivate.isChecked = it
                 }
             }
             binding.switchActivate.setOnCheckedChangeListener { _, b ->
-                CoroutineScope(Dispatchers.Main.immediate).launch {
+                CoroutineScope(Dispatchers.Main).launch {
                     viewModel.activateFlow.emit(b)
                 }
             }

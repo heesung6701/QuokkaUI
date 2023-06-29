@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 data class AppInfoViewModel(
     override val key: AppInfo,
+    override val onItemClicked : ((AppInfo) -> Unit)?,
     val appName: String,
     override val appIcon: Flow<Drawable>
 ) : ViewModel, HasTitle, HasAppIcon {

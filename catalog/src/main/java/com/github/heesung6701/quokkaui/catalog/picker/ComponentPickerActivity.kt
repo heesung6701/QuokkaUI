@@ -14,27 +14,33 @@ class ComponentPickerActivity : AppCompatActivity() {
         val binding = ActivityComponentPickerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val onItemClickListener: (AppInfo) -> Unit = {
+            Toast.makeText(this, it.packageName + "is clicked", Toast.LENGTH_SHORT)
+                .show()
+        }
         val appInfoList =
             AppInfoHelper.getInstalledPackages(packageManager).mapIndexed { index, appInfo ->
                 if (index % 3 == 0) {
                     appInfo.subTitle = "idx - $index"
                 }
-                if (index % 6 == 0) {
+                if (index % 2 == 0) {
                     appInfo.activate = index % 12 == 0
+                }
+                if (index % 12 == 0) {
+                    appInfo.onItemClicked = onItemClickListener
                 }
                 appInfo
             }
         binding.componentPicker.apply {
             setShowAllApps(true)
             submitList(appInfoList)
-            setOnItemClickListener(object : ComponentPickerView.OnItemClickedListener {
-                override fun onItemClicked(appInfo: AppInfo) {
-                    Toast.makeText(context, appInfo.toString(), Toast.LENGTH_SHORT).show()
-                }
-            })
             setOnActivateChangeListener(object : ComponentPickerView.OnActivateChangeListener {
                 override fun onActivateChanged(appInfo: AppInfo) {
-                    Toast.makeText(context, "${appInfo.packageName} is changed ${appInfo.activate}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        "${appInfo.packageName} is changed ${appInfo.activate}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             })
         }

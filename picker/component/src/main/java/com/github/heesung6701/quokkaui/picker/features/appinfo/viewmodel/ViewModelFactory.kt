@@ -22,7 +22,8 @@ class ViewModelFactory(val context: Context) {
                     emit(getDefaultIcon(appInfo))
                 },
                 subTitle = appInfo.subTitle?:"",
-                activateFlow = MutableStateFlow(appInfo.activate!!)
+                activateFlow = MutableStateFlow(appInfo.activate!!),
+                onItemClicked = appInfo.onItemClicked
             )
         }
         if (appInfo.subTitle != null) {
@@ -31,14 +32,16 @@ class ViewModelFactory(val context: Context) {
                 appIcon = flow {
                     emit(getDefaultIcon(appInfo))
                 },
-                subTitle = appInfo.subTitle!!
+                subTitle = appInfo.subTitle!!,
+                onItemClicked = appInfo.onItemClicked
             )
         }
         return AppInfoViewModel(appInfo,
             appName = getDefaultLabel(appInfo),
             appIcon = flow {
                 emit(getDefaultIcon(appInfo))
-            }
+            },
+            onItemClicked = appInfo.onItemClicked
         )
     }
 

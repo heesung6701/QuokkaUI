@@ -2,8 +2,10 @@ package com.github.heesung6701.quokkaui.picker.features.appinfo.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Switch
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.github.heesung6701.quokkaui.picker.R
 import com.github.heesung6701.quokkaui.picker.databinding.ListItemAppInfoFrameBinding
 import com.github.heesung6701.quokkaui.picker.features.appinfo.data.AppInfo
 import com.github.heesung6701.quokkaui.picker.features.appinfo.data.comoposable.ComposableTypeSet
@@ -11,7 +13,6 @@ import com.github.heesung6701.quokkaui.picker.features.appinfo.viewholder.Compos
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AllSwitchViewModel
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoSubTitleViewModel
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoSwitchViewModel
-import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoViewModel
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.HasSwitch
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -19,8 +20,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
-class AppInfoListAdapter(val onItemClick: (AppInfo) -> Unit) :
+class AppInfoListAdapter() :
     ListAdapter<ViewModel, ComposableViewHolder>(DiffUtils) {
 
     companion object {
@@ -58,9 +60,22 @@ class AppInfoListAdapter(val onItemClick: (AppInfo) -> Unit) :
         super.onBindViewHolder(holder, position, payloads)
         val item = getItem(position)
         holder.bindData(item)
-        holder.itemView.setOnClickListener {
-            if (item is AppInfoViewModel || item is AppInfoSubTitleViewModel) {
-                onItemClick(item.key as AppInfo)
+        val onItemClicked = item.onItemClicked
+
+        if (onItemClicked == null) {
+            if (item is HasSwitch) {
+                holder.itemView.setOnClickListener {
+                    val prevValue = holder.itemView.findViewById<Switch>(R.id.switch_activate).isChecked
+                    runBlocking {
+                        item.activateFlow.emit(!prevValue)
+                    }
+                }
+            }
+        } else {
+            if (item.key is AppInfo) {
+                holder.itemView.setOnClickListener {
+                    onItemClicked(item.key as AppInfo)
+                }
             }
         }
     }
