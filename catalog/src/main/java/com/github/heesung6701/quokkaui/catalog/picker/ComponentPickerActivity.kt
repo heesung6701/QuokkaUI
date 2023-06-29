@@ -1,48 +1,156 @@
 package com.github.heesung6701.quokkaui.catalog.picker
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.github.heesung6701.quokkaui.catalog.databinding.ActivityComponentPickerBinding
 import com.github.heesung6701.quokkaui.picker.features.appinfo.data.AppInfo
 import com.github.heesung6701.quokkaui.picker.helper.AppInfoHelper
 import com.github.heesung6701.quokkaui.picker.widget.ComponentPickerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 
 class ComponentPickerActivity : AppCompatActivity() {
+
+    private val defaultAppInfoList: DataSet by lazy {
+        DataSet(
+            name = "기본",
+            appInfoList = AppInfoHelper.getInstalledPackages(packageManager),
+            configuration = {
+
+            }
+        )
+    }
+
+    private val subLabelAppInfoList: DataSet by lazy {
+        DataSet(
+            name = "서브라벨",
+            appInfoList = AppInfoHelper.getInstalledPackages(packageManager)
+                .mapIndexed { index, appInfo ->
+                    appInfo.subTitle = "index - $index"
+                    appInfo
+                },
+        )
+    }
+
+    private val switchAppInfoList: DataSet by lazy {
+        DataSet(
+            name = "스위치",
+            appInfoList = AppInfoHelper.getInstalledPackages(packageManager)
+                .mapIndexed { index, appInfo ->
+                    appInfo.activate = false
+                    appInfo
+                },
+            configuration = {
+                setShowAllApps(true)
+                setOnActivateChangeListener(object : ComponentPickerView.OnActivateChangeListener {
+                    override fun onActivateChanged(appInfo: AppInfo) {
+                        Toast.makeText(
+                            context,
+                            "${appInfo.packageName} is changed ${appInfo.activate}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                })
+            }
+        )
+    }
+
+    private val switchAndSubLabelAppInfoList: DataSet by lazy {
+        DataSet(
+            name = "스위치 + 서브 라벨",
+            appInfoList = AppInfoHelper.getInstalledPackages(packageManager)
+                .mapIndexed { index, appInfo ->
+                    appInfo.activate = false
+                    appInfo.subTitle = "index - $index"
+                    appInfo
+                },
+            configuration = {
+                setShowAllApps(true)
+                setOnActivateChangeListener(object : ComponentPickerView.OnActivateChangeListener {
+                    override fun onActivateChanged(appInfo: AppInfo) {
+                        Toast.makeText(
+                            context,
+                            "${appInfo.packageName} is changed ${appInfo.activate}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                })
+            }
+        )
+    }
+
+    private lateinit var mutableStateFlow: MutableStateFlow<UiState>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityComponentPickerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val onItemClickListener: (AppInfo) -> Unit = {
-            Toast.makeText(this, it.packageName + "is clicked", Toast.LENGTH_SHORT)
-                .show()
-        }
-        val appInfoList =
-            AppInfoHelper.getInstalledPackages(packageManager).mapIndexed { index, appInfo ->
-                if (index % 3 == 0) {
-                    appInfo.subTitle = "idx - $index"
+        listOf(
+            defaultAppInfoList,
+            subLabelAppInfoList,
+            switchAppInfoList,
+            switchAndSubLabelAppInfoList
+        ).apply {
+            forEachIndexed { index, dataSet ->
+                if (this.lastIndex == index) {
+                    return@forEachIndexed
                 }
-                if (index % 2 == 0) {
-                    appInfo.activate = index % 12 == 0
-                }
-                if (index % 12 == 0) {
-                    appInfo.onItemClicked = onItemClickListener
-                }
-                appInfo
+                dataSet.next = this[index + 1]
+                this[index + 1].prev = dataSet
             }
-        binding.componentPicker.apply {
-            setShowAllApps(true)
-            submitList(appInfoList)
-            setOnActivateChangeListener(object : ComponentPickerView.OnActivateChangeListener {
-                override fun onActivateChanged(appInfo: AppInfo) {
-                    Toast.makeText(
-                        context,
-                        "${appInfo.packageName} is changed ${appInfo.activate}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            })
         }
+        mutableStateFlow = MutableStateFlow(UiState(defaultAppInfoList))
+
+        binding.btnNext.setOnClickListener {
+            mutableStateFlow.tryEmit(
+                UiState(
+                    dataSet = mutableStateFlow.value.dataSet.next!!
+                )
+            )
+        }
+
+        binding.btnPrev.setOnClickListener {
+            mutableStateFlow.tryEmit(
+                UiState(
+                    dataSet = mutableStateFlow.value.dataSet.prev!!
+                )
+            )
+        }
+
+        val onItemClickListener: (AppInfo) -> Unit = {
+            Toast.makeText(this, it.packageName + "is clicked", Toast.LENGTH_SHORT).show()
+        }
+
+        CoroutineScope(Dispatchers.Main).launch {
+            mutableStateFlow.collect { uiState ->
+                uiState.dataSet.apply {
+                    binding.componentPicker.submitList(
+                        appInfoList.map {
+                            it.onItemClicked = onItemClickListener
+                            it
+                        },
+                    )
+                    binding.tvDataset.text = name
+                    binding.btnPrev.visibility = if (prev != null) View.VISIBLE else View.INVISIBLE
+                    binding.btnNext.visibility = if (next != null) View.VISIBLE else View.INVISIBLE
+                }
+            }
+        }
+    }
+
+    data class UiState(val dataSet: DataSet)
+
+    data class DataSet(
+        val name: String,
+        val appInfoList: List<AppInfo>,
+        val configuration: ComponentPickerView.() -> Unit = {}
+    ) {
+        var prev: DataSet? = null
+        var next: DataSet? = null
     }
 }
