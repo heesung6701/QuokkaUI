@@ -27,7 +27,7 @@ class ComponentPickerActivity : AppCompatActivity() {
 
     private val subLabelAppInfoList: DataSet by lazy {
         DataSet(
-            name = "서브라벨",
+            name = "서브 라벨",
             appInfoList = AppInfoHelper.getInstalledPackages(packageManager)
                 .mapIndexed { index, appInfo ->
                     appInfo.subTitle = "index - $index"
@@ -40,7 +40,52 @@ class ComponentPickerActivity : AppCompatActivity() {
         DataSet(
             name = "스위치",
             appInfoList = AppInfoHelper.getInstalledPackages(packageManager)
+                .mapIndexed { _, appInfo ->
+                    appInfo.activate = false
+                    appInfo
+                },
+            configuration = {
+                setOnActivateChangeListener(object : ComponentPickerView.OnActivateChangeListener {
+                    override fun onActivateChanged(appInfo: AppInfo) {
+                        Toast.makeText(
+                            context,
+                            "${appInfo.packageName} is changed ${appInfo.activate}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                })
+            }
+        )
+    }
+
+    private val switchAndSubLabelAppInfoList: DataSet by lazy {
+        DataSet(
+            name = "스위치 + 서브 라벨",
+            appInfoList = AppInfoHelper.getInstalledPackages(packageManager)
                 .mapIndexed { index, appInfo ->
+                    appInfo.activate = false
+                    appInfo.subTitle = "index - $index"
+                    appInfo
+                },
+            configuration = {
+                setOnActivateChangeListener(object : ComponentPickerView.OnActivateChangeListener {
+                    override fun onActivateChanged(appInfo: AppInfo) {
+                        Toast.makeText(
+                            context,
+                            "${appInfo.packageName} is changed ${appInfo.activate}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                })
+            }
+        )
+    }
+
+    private val switchAllAppsAppInfoList: DataSet by lazy {
+        DataSet(
+            name = "스위치 + All Apps",
+            appInfoList = AppInfoHelper.getInstalledPackages(packageManager)
+                .mapIndexed { _, appInfo ->
                     appInfo.activate = false
                     appInfo
                 },
@@ -59,9 +104,9 @@ class ComponentPickerActivity : AppCompatActivity() {
         )
     }
 
-    private val switchAndSubLabelAppInfoList: DataSet by lazy {
+    private val switchAndSubLabelWithAllAppsAppInfoList: DataSet by lazy {
         DataSet(
-            name = "스위치 + 서브 라벨",
+            name = "스위치 + 서브 라벨 + All Apps",
             appInfoList = AppInfoHelper.getInstalledPackages(packageManager)
                 .mapIndexed { index, appInfo ->
                     appInfo.activate = false
@@ -94,7 +139,9 @@ class ComponentPickerActivity : AppCompatActivity() {
             defaultAppInfoList,
             subLabelAppInfoList,
             switchAppInfoList,
-            switchAndSubLabelAppInfoList
+            switchAndSubLabelAppInfoList,
+            switchAllAppsAppInfoList,
+            switchAndSubLabelWithAllAppsAppInfoList
         ).apply {
             forEachIndexed { index, dataSet ->
                 if (this.lastIndex == index) {
@@ -129,6 +176,7 @@ class ComponentPickerActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             mutableStateFlow.collect { uiState ->
                 uiState.dataSet.apply {
+                    with(binding.componentPicker, configuration)
                     binding.componentPicker.submitList(
                         appInfoList.map {
                             it.onItemClicked = onItemClickListener
