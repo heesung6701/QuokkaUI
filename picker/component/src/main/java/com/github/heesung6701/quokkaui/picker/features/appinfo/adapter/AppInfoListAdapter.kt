@@ -38,7 +38,7 @@ class AppInfoListAdapter() :
                 oldItem: ViewModel,
                 newItem: ViewModel
             ): Boolean {
-                return oldItem.key == newItem.key
+                return oldItem == newItem
             }
         }
     }

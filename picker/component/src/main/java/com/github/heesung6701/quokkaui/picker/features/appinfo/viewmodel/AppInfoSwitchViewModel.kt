@@ -12,7 +12,7 @@ data class AppInfoSwitchViewModel(
     override val subTitle: String,
     override val appIcon: Flow<Drawable>,
     override val activateFlow: MutableStateFlow<Boolean>,
-) : ViewModel, HasTitle, HasSubTitle, HasSwitch, HasAppIcon {
+) : ViewModel(), HasTitle, HasSubTitle, HasSwitch, HasAppIcon {
     override val title: String
         get() = appName
 }

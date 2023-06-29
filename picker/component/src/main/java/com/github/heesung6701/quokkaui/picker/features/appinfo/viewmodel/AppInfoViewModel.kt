@@ -9,7 +9,7 @@ data class AppInfoViewModel(
     override val onItemClicked : ((AppInfo) -> Unit)?,
     val appName: String,
     override val appIcon: Flow<Drawable>
-) : ViewModel, HasTitle, HasAppIcon {
+) : ViewModel(), HasTitle, HasAppIcon {
     override val title: String
         get() = appName
 }

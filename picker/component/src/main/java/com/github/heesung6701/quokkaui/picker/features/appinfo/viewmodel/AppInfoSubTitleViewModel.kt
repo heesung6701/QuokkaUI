@@ -10,7 +10,7 @@ data class AppInfoSubTitleViewModel(
     val appName: String,
     override val appIcon: Flow<Drawable>,
     override val subTitle: String
-) : ViewModel, HasTitle, HasSubTitle, HasAppIcon {
+) : ViewModel(), HasTitle, HasSubTitle, HasAppIcon {
     override val title: String
         get() = appName
 }
