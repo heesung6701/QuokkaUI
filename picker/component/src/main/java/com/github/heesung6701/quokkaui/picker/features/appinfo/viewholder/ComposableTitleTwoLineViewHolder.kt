@@ -5,6 +5,7 @@ import com.github.heesung6701.quokkaui.picker.databinding.LayoutAppInfoTitleTwoL
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.HasSubTitle
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.HasTitle
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewModel
+import com.github.heesung6701.quokkaui.picker.features.composable.ComposableItemViewHolder
 
 class ComposableTitleTwoLineViewHolder(itemView: View) :
     ComposableItemViewHolder(itemView) {

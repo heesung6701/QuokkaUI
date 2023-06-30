@@ -1,9 +1,8 @@
-package com.github.heesung6701.quokkaui.picker.features.appinfo.viewholder
+package com.github.heesung6701.quokkaui.picker.features.composable
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.github.heesung6701.quokkaui.picker.databinding.ListItemAppInfoFrameBinding
-import com.github.heesung6701.quokkaui.picker.features.appinfo.data.comoposable.ComposableType
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewModel
 
 class ComposableViewHolder(binding: ListItemAppInfoFrameBinding, composableType: ComposableType) :

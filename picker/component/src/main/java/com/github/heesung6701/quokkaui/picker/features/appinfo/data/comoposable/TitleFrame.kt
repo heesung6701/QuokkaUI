@@ -2,9 +2,10 @@ package com.github.heesung6701.quokkaui.picker.features.appinfo.data.comoposable
 
 import androidx.annotation.LayoutRes
 import com.github.heesung6701.quokkaui.picker.R
-import com.github.heesung6701.quokkaui.picker.features.appinfo.viewholder.ComposableItemViewHolder
+import com.github.heesung6701.quokkaui.picker.features.composable.ComposableItemViewHolder
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewholder.ComposableTitleSingleLineViewHolder
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewholder.ComposableTitleTwoLineViewHolder
+import com.github.heesung6701.quokkaui.picker.features.composable.ComposableFrame
 
 enum class TitleFrame(
     @LayoutRes

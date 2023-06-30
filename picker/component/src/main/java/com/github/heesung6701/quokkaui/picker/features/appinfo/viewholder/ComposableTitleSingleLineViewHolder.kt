@@ -4,6 +4,7 @@ import android.view.View
 import com.github.heesung6701.quokkaui.picker.databinding.LayoutAppInfoTitleSingleLineBinding
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.HasTitle
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewModel
+import com.github.heesung6701.quokkaui.picker.features.composable.ComposableItemViewHolder
 
 class ComposableTitleSingleLineViewHolder(itemView: View) :
     ComposableItemViewHolder(itemView) {

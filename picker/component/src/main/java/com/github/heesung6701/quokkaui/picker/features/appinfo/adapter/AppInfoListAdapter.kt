@@ -9,7 +9,7 @@ import com.github.heesung6701.quokkaui.picker.R
 import com.github.heesung6701.quokkaui.picker.databinding.ListItemAppInfoFrameBinding
 import com.github.heesung6701.quokkaui.picker.features.appinfo.data.AppInfo
 import com.github.heesung6701.quokkaui.picker.features.appinfo.data.comoposable.ComposableTypeSet
-import com.github.heesung6701.quokkaui.picker.features.appinfo.viewholder.ComposableViewHolder
+import com.github.heesung6701.quokkaui.picker.features.composable.ComposableViewHolder
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AllSwitchViewModel
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoSubTitleViewModel
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoSwitchViewModel

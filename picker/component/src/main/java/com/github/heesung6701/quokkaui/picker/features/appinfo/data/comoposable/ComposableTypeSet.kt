@@ -1,5 +1,8 @@
 package com.github.heesung6701.quokkaui.picker.features.appinfo.data.comoposable
 
+import com.github.heesung6701.quokkaui.picker.features.composable.ComposableFrame
+import com.github.heesung6701.quokkaui.picker.features.composable.ComposableType
+
 enum class ComposableTypeSet(
     override val leftFrame: ComposableFrame?,
     override val iconFrame: IconFrame?,
