@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.github.heesung6701.quokkaui.catalog.anchor.window.DialogAnchorActivity
 import com.github.heesung6701.quokkaui.catalog.picker.ComponentPickerActivity
+import com.github.heesung6701.quokkaui.catalog.picker.ComponentPickerComposableTestActivity
 import com.github.heesung6701.quokkaui.catalog.touchdelegate.TouchDelegateActivity
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +40,10 @@ class MainActivity : AppCompatActivity() {
             CatalogItemData(
                 getString(R.string.title_activity_picker_component),
                 ComponentPickerActivity::class.java
+            ),
+            CatalogItemData(
+                getString(R.string.title_activity_picker_component_composable),
+                ComponentPickerComposableTestActivity::class.java
             )
         )
         setContent {
