@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.github.heesung6701.quokkaui.picker.R
 import com.github.heesung6701.quokkaui.picker.databinding.ListItemAppInfoFrameBinding
 import com.github.heesung6701.quokkaui.picker.features.appinfo.data.AppInfo
-import com.github.heesung6701.quokkaui.picker.features.appinfo.data.comoposable.ComposableTypeSet
+import com.github.heesung6701.quokkaui.picker.features.appinfo.composable.ComposableTypeSet
 import com.github.heesung6701.quokkaui.picker.features.composable.ComposableViewHolder
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AllSwitchViewModel
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoSubTitleViewModel

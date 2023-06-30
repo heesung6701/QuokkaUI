@@ -1,8 +1,7 @@
-package com.github.heesung6701.quokkaui.picker.features.appinfo.data.comoposable
+package com.github.heesung6701.quokkaui.picker.features.appinfo.composable.icon
 
 import androidx.annotation.LayoutRes
 import com.github.heesung6701.quokkaui.picker.R
-import com.github.heesung6701.quokkaui.picker.features.appinfo.viewholder.ComposableIconViewHolder
 import com.github.heesung6701.quokkaui.picker.features.composable.ComposableFrame
 import com.github.heesung6701.quokkaui.picker.features.composable.ComposableItemViewHolder
 

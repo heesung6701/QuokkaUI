@@ -1,4 +1,4 @@
-package com.github.heesung6701.quokkaui.picker.features.appinfo.viewholder
+package com.github.heesung6701.quokkaui.picker.features.appinfo.composable.widget
 
 import android.view.View
 import com.github.heesung6701.quokkaui.picker.databinding.LayoutAppInfoSwitchBinding
