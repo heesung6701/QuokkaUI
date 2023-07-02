@@ -44,8 +44,8 @@ class AppInfoListAdapter() :
     private var allSwitchViewModel: AllSwitchViewModel? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComposableViewHolder {
-        if (viewType in composableFactory.idRange) {
-            return composableFactory.onCreateViewHolder(parent, viewType)
+        if (viewType in ComposableFactory.RANGE) {
+            return composableFactory.createViewHolder(parent, viewType)
         }
         throw NotImplementedError("not implemented")
     }
