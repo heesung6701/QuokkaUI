@@ -16,4 +16,6 @@ class ComposableTitleSingleLineViewHolder(itemView: View) :
             binding.appName.text = viewModel.title
         }
     }
+
+    override fun onViewRecycled() {}
 }

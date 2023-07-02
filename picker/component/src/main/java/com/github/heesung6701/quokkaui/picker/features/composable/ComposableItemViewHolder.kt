@@ -6,4 +6,6 @@ import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewMod
 abstract class ComposableItemViewHolder(itemView: View) {
 
     abstract fun bindData(viewModel: ViewModel)
+
+    abstract fun onViewRecycled()
 }

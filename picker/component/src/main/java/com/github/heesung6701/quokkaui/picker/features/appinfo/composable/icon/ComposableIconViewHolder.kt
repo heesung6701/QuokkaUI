@@ -17,4 +17,6 @@ class ComposableIconViewHolder(itemView: View) :
             binding.appIcon.loadIcon(viewModel.appIcon)
         }
     }
+
+    override fun onViewRecycled() {}
 }

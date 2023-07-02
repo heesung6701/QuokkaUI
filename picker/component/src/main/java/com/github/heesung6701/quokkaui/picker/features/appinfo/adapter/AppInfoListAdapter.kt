@@ -80,6 +80,10 @@ class AppInfoListAdapter() :
         }
     }
 
+    override fun onViewRecycled(holder: ComposableViewHolder) {
+        super.onViewRecycled(holder)
+        holder.onViewRecycled()
+    }
     override fun onBindViewHolder(holder: ComposableViewHolder, position: Int) {
         val viewModel = getItem(position)
         holder.bindData(viewModel)

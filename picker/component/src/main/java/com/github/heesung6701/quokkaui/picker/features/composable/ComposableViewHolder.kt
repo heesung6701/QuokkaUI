@@ -32,4 +32,7 @@ class ComposableViewHolder(binding: ListItemAppInfoFrameBinding, composableType:
             it.bindData(viewModel)
         }
     }
+
+    fun onViewRecycled() {
+    }
 }

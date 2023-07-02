@@ -20,4 +20,6 @@ class ComposableTitleTwoLineViewHolder(itemView: View) :
             binding.subTitle.text = viewModel.subTitle
         }
     }
+
+    override fun onViewRecycled() {}
 }
