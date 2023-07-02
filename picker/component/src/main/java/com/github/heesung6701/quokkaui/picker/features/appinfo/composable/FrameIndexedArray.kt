@@ -4,7 +4,7 @@ import android.util.Log
 import com.github.heesung6701.quokkaui.picker.features.appinfo.composable.left.LeftFrame
 import com.github.heesung6701.quokkaui.picker.features.composable.ComposableFrame
 
-class FrameSet {
+class FrameIndexedArray {
     private var size = 0
     private val frameArray: Array<ComposableFrame?> = Array(ComposableFactory.MAX_FRAME_ID) { null }
 

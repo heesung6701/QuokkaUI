@@ -5,20 +5,20 @@ import org.junit.Assert
 import org.junit.Test
 import org.mockito.Mockito.mock
 
-class FrameSetTest {
+class FrameIndexedArrayTest {
 
     @Test
     fun test_FrameSet() {
         val mockFrameList = (0..10).map {
             mock(ComposableFrame::class.java)
         }
-        val frameSet = FrameSet()
+        val frameIndexedArray = FrameIndexedArray()
         mockFrameList.forEach {
-            frameSet.addFrame(it)
+            frameIndexedArray.addFrame(it)
         }
-        Assert.assertEquals(mockFrameList.size, frameSet.getSize())
+        Assert.assertEquals(mockFrameList.size, frameIndexedArray.getSize())
         mockFrameList.forEachIndexed { index, composableFrame ->
-            Assert.assertEquals(index + 1, frameSet.getFrameId(composableFrame))
+            Assert.assertEquals(index + 1, frameIndexedArray.getFrameId(composableFrame))
         }
     }
 }

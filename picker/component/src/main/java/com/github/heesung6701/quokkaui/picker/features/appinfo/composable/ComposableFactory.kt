@@ -60,19 +60,19 @@ class ComposableFactory {
     @IntRange(from = 0, to = MAX_ITEM_TYPE.toLong())
     annotation class ComposableItemType
 
-    private val leftFrameSet: FrameSet = FrameSet().apply {
+    private val leftFrameIndexedArray: FrameIndexedArray = FrameIndexedArray().apply {
         LeftFrame.values().forEach(this::addFrame)
     }
 
-    private val iconFrameSet: FrameSet = FrameSet().apply {
+    private val iconFrameIndexedArray: FrameIndexedArray = FrameIndexedArray().apply {
         IconFrame.values().forEach(this::addFrame)
     }
 
-    private val titleFrameSet: FrameSet = FrameSet().apply {
+    private val titleFrameIndexedArray: FrameIndexedArray = FrameIndexedArray().apply {
         TitleFrame.values().forEach(this::addFrame)
     }
 
-    private val widgetFrameSet: FrameSet = FrameSet().apply {
+    private val widgetFrameIndexedArray: FrameIndexedArray = FrameIndexedArray().apply {
         WidgetFrame.values().forEach(this::addFrame)
     }
 
@@ -88,20 +88,20 @@ class ComposableFactory {
         val widgetFrameId = getWidgetFrameId(viewType)
 
         val composableType = ComposableTypeImpl(
-            leftFrame = leftFrameSet[leftFrameId],
-            iconFrame = iconFrameSet[iconFrameId],
-            titleFrame = titleFrameSet[titleFrameId],
-            widgetFrame = widgetFrameSet[widgetFrameId],
+            leftFrame = leftFrameIndexedArray[leftFrameId],
+            iconFrame = iconFrameIndexedArray[iconFrameId],
+            titleFrame = titleFrameIndexedArray[titleFrameId],
+            widgetFrame = widgetFrameIndexedArray[widgetFrameId],
         )
         return ComposableViewHolder(binding, composableType)
     }
 
     fun getItemType(composableType: ComposableType): Int {
         return listOf(
-            composableType.leftFrame to (LEFT_BIT_RANGE to leftFrameSet),
-            composableType.iconFrame to (ICON_BIT_RANGE to iconFrameSet),
-            composableType.titleFrame to (TITLE_BIT_RANGE to titleFrameSet),
-            composableType.widgetFrame to (WIDGET_BIT_RANGE to widgetFrameSet),
+            composableType.leftFrame to (LEFT_BIT_RANGE to leftFrameIndexedArray),
+            composableType.iconFrame to (ICON_BIT_RANGE to iconFrameIndexedArray),
+            composableType.titleFrame to (TITLE_BIT_RANGE to titleFrameIndexedArray),
+            composableType.widgetFrame to (WIDGET_BIT_RANGE to widgetFrameIndexedArray),
         ).fold(0) { acc: Int, (frame, pair) ->
             frame?.let {
                 val (range, frameSet) = pair
