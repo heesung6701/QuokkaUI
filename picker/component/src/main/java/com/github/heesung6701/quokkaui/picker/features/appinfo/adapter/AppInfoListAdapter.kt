@@ -63,7 +63,8 @@ class AppInfoListAdapter() :
         if (onItemClicked == null) {
             if (item is HasSwitch) {
                 holder.itemView.setOnClickListener {
-                    val prevValue = holder.itemView.findViewById<Switch>(R.id.switch_activate).isChecked
+                    val prevValue =
+                        holder.itemView.findViewById<Switch>(R.id.switch_activate).isChecked
                     runBlocking {
                         item.activateFlow.emit(!prevValue)
                     }
@@ -82,6 +83,7 @@ class AppInfoListAdapter() :
         super.onViewRecycled(holder)
         holder.onViewRecycled()
     }
+
     override fun onBindViewHolder(holder: ComposableViewHolder, position: Int) {
         val viewModel = getItem(position)
         holder.bindData(viewModel)
@@ -105,6 +107,7 @@ class AppInfoListAdapter() :
         newItemList.addAll(list)
         super.submitList(newItemList)
     }
+
     fun setShowAllApps(showAllApps: Boolean) {
         this.showAllApps = showAllApps
         allSwitchViewModel = if (showAllApps) {

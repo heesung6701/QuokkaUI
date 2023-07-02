@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 data class AppInfoSwitchViewModel(
     override val key: AppInfo,
-    override val onItemClicked : ((AppInfo) -> Unit)?,
+    override val onItemClicked: ((AppInfo) -> Unit)?,
     val appName: String,
     override val subTitle: String,
     override val appIcon: Flow<Drawable>,
