@@ -1,20 +1,16 @@
 package com.github.heesung6701.quokkaui.picker.features.appinfo.adapter
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Switch
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.github.heesung6701.quokkaui.picker.R
-import com.github.heesung6701.quokkaui.picker.databinding.ListItemAppInfoFrameBinding
+import com.github.heesung6701.quokkaui.picker.features.appinfo.composable.ComposableFactory
 import com.github.heesung6701.quokkaui.picker.features.appinfo.data.AppInfo
-import com.github.heesung6701.quokkaui.picker.features.appinfo.composable.ComposableTypeSet
-import com.github.heesung6701.quokkaui.picker.features.composable.ComposableViewHolder
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AllSwitchViewModel
-import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoSubTitleViewModel
-import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.AppInfoSwitchViewModel
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.HasSwitch
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewModel
+import com.github.heesung6701.quokkaui.picker.features.composable.ComposableViewHolder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -43,13 +39,12 @@ class AppInfoListAdapter() :
         }
     }
 
+    private val composableFactory = ComposableFactory()
     private var showAllApps: Boolean = false
     private var allSwitchViewModel: AllSwitchViewModel? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComposableViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = ListItemAppInfoFrameBinding.inflate(inflater, parent, false)
-        val composableType = ComposableTypeSet.values()[viewType]
-        return ComposableViewHolder(binding, composableType)
+        return composableFactory.onCreateViewHolder(parent, viewType)
     }
 
     override fun onBindViewHolder(
@@ -90,23 +85,7 @@ class AppInfoListAdapter() :
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (getItem(position)) {
-            is AllSwitchViewModel -> {
-                ComposableTypeSet.AllSwitch.ordinal
-            }
-
-            is AppInfoSwitchViewModel -> {
-                ComposableTypeSet.SwitchPreference.ordinal
-            }
-
-            is AppInfoSubTitleViewModel -> {
-                ComposableTypeSet.TwoTextLine.ordinal
-            }
-
-            else -> {
-                ComposableTypeSet.SingleTextLine.ordinal
-            }
-        }
+        return composableFactory.getItemType(getItem(position))
     }
 
     override fun submitList(list: MutableList<ViewModel>?) {
