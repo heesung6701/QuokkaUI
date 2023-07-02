@@ -4,5 +4,5 @@ interface ComposableType {
     val leftFrame: ComposableFrame?
     val iconFrame: ComposableFrame?
     val titleFrame: ComposableFrame
-    val rightFrame: ComposableFrame?
+    val widgetFrame: ComposableFrame?
 }

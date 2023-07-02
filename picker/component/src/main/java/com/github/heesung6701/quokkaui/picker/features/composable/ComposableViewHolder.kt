@@ -13,7 +13,7 @@ class ComposableViewHolder(binding: ListItemAppInfoFrameBinding, composableType:
     init {
         composableItemViewHolderList = listOf(
             composableType.leftFrame to binding.leftFrame,
-            composableType.rightFrame to binding.rightFrame,
+            composableType.widgetFrame to binding.widgetFrame,
             composableType.titleFrame to binding.titleFrame,
             composableType.iconFrame to binding.iconFrame,
         ).mapNotNull { (type, viewStub) ->

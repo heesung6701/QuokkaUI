@@ -32,17 +32,17 @@
         android:layout_height="match_parent"
         android:inflatedId="@id/title_frame"
         app:layout_constraintStart_toEndOf="@id/icon_frame"
-        app:layout_constraintEnd_toStartOf="@id/right_frame"
+        app:layout_constraintEnd_toStartOf="@id/widget_frame"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout="@layout/layout_app_info_title_single_line"
         />
 
     <ViewStub
-        android:id="@+id/right_frame"
+        android:id="@+id/widget_frame"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:inflatedId="@id/right_frame"
+        android:inflatedId="@id/widget_frame"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
