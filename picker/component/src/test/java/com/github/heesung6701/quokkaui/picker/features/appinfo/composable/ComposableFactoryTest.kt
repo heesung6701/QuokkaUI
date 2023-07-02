@@ -16,30 +16,6 @@ import org.mockito.Mockito.mock
 class ComposableFactoryTest {
 
     @Test
-    fun test_Companion_getLeftFrameId() {
-        val actual = ComposableFactory.getLeftFrameId(0xabcd)
-        Assert.assertEquals((0xa).toString(2), actual.toString(2))
-    }
-
-    @Test
-    fun test_Companion_getIconFrameId() {
-        val actual = ComposableFactory.getIconFrameId(0xabcd)
-        Assert.assertEquals((0xb).toString(2), actual.toString(2))
-    }
-
-    @Test
-    fun test_Companion_getTitleFrameId() {
-        val actual = ComposableFactory.getTitleFrameId(0xabcd)
-        Assert.assertEquals((0xc).toString(2), actual.toString(2))
-    }
-
-    @Test
-    fun test_Companion_getWidgetFrameId() {
-        val actual = ComposableFactory.getWidgetFrameId(0xabcd)
-        Assert.assertEquals((0xd).toString(2), actual.toString(2))
-    }
-
-    @Test
     fun test_getItemType_with_ViewModel() {
         val composableFactory = ComposableFactory()
         val mockDrawable = mock(Drawable::class.java)
@@ -73,26 +49,6 @@ class ComposableFactoryTest {
             val actual = composableFactory.getItemType(viewModel)
             val expected = composableFactory.getItemType(composableSet)
             Assert.assertEquals(expected, actual)
-        }
-    }
-
-    @Test
-    fun test_getItemType_with_composableType() {
-
-        val composableFactory = ComposableFactory()
-
-        listOf(
-            ComposableTypeSet.AllSwitch to ((1 shl 4) + 1),
-            ComposableTypeSet.SwitchPreference to ((1 shl 8) + (2 shl 4) + 1),
-            ComposableTypeSet.TwoTextLine to ((1 shl 8) + (2 shl 4)),
-            ComposableTypeSet.SingleTextLine to ((1 shl 8) + (1 shl 4))
-        ).forEach { (composableType, expected) ->
-            val actual = composableFactory.getItemType(composableType)
-
-            Assert.assertEquals(
-                expected.toString(2),
-                actual.toString(2)
-            )
         }
     }
 }

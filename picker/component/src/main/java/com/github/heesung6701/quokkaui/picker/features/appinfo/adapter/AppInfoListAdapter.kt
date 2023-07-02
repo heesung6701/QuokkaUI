@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class AppInfoListAdapter() :
+class AppInfoListAdapter(private val composableFactory: ComposableFactory = ComposableFactory()) :
     ListAdapter<ViewModel, ComposableViewHolder>(DiffUtils) {
 
     companion object {
@@ -39,15 +39,14 @@ class AppInfoListAdapter() :
         }
     }
 
-    private val composableFactory = ComposableFactory()
     private var showAllApps: Boolean = false
     private var allSwitchViewModel: AllSwitchViewModel? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComposableViewHolder {
-        if (viewType in ComposableFactory.RANGE) {
+        if (viewType in composableFactory.range) {
             return composableFactory.createViewHolder(parent, viewType)
         }
-        throw NotImplementedError("not implemented")
+        throw NotImplementedError("not implemented : viewType is $viewType. composable range : ${composableFactory.range}")
     }
 
     override fun onBindViewHolder(
@@ -91,7 +90,6 @@ class AppInfoListAdapter() :
 
     override fun getItemViewType(position: Int): Int {
         return composableFactory.getItemType(getItem(position))
-            ?: throw NotImplementedError("not implemented")
     }
 
     override fun submitList(list: MutableList<ViewModel>?) {
