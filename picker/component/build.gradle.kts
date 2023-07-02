@@ -48,6 +48,8 @@ dependencies {
     implementation(libs.coroutinesAndroid)
 
     testImplementation(libs.junit)
+    testImplementation(libs.mockitoCore)
+    testImplementation(libs.mockitoKotlin)
     androidTestImplementation(libs.testExtJunit)
     androidTestImplementation(libs.testExtJunitKtx)
     androidTestImplementation(libs.espressoCore)
