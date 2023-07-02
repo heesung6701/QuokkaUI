@@ -44,7 +44,10 @@ class AppInfoListAdapter() :
     private var allSwitchViewModel: AllSwitchViewModel? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComposableViewHolder {
-        return composableFactory.onCreateViewHolder(parent, viewType)
+        if (viewType in composableFactory.idRange) {
+            return composableFactory.onCreateViewHolder(parent, viewType)
+        }
+        throw NotImplementedError("not implemented")
     }
 
     override fun onBindViewHolder(
@@ -86,6 +89,7 @@ class AppInfoListAdapter() :
 
     override fun getItemViewType(position: Int): Int {
         return composableFactory.getItemType(getItem(position))
+            ?: throw NotImplementedError("not implemented")
     }
 
     override fun submitList(list: MutableList<ViewModel>?) {
