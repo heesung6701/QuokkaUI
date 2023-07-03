@@ -16,13 +16,13 @@ class ComposableBitConverter(
             return (data and bitMask) shr range.first
         }
 
-        const val OFFSET_FOR_ZERO_AS_NULL = 1
-        const val BIT_NULL = 0
+        private const val OFFSET_FOR_ZERO_AS_NULL = 1
+        private const val BIT_NULL = 0
 
-        const val LEFT = 0
-        const val ICON = 1
-        const val TITLE = 2
-        const val WIDGET = 3
+        private const val LEFT = 0
+        private const val ICON = 1
+        private const val TITLE = 2
+        private const val WIDGET = 3
     }
 
     private val frameInfo: Array<List<ComposableFrame>> = Array(4) {
