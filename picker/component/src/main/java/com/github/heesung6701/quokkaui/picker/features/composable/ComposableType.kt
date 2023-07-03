@@ -6,7 +6,7 @@ interface ComposableType {
     val titleFrame: ComposableFrame?
     val widgetFrame: ComposableFrame?
 
-    private class ComposableTypeImpl(
+    private data class ComposableTypeImpl(
         override val leftFrame: ComposableFrame?,
         override val iconFrame: ComposableFrame?,
         override val titleFrame: ComposableFrame?,

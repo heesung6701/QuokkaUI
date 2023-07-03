@@ -51,11 +51,42 @@ class FrameBitConverter(
         maxBit = (1 shl startIndex) - 1
     }
 
+    fun encodeAsBits(composableType: ComposableType): Int {
+        return listOf(
+            composableType.leftFrame to LEFT,
+            composableType.iconFrame to ICON,
+            composableType.titleFrame to TITLE,
+            composableType.widgetFrame to WIDGET,
+        )
+            .fold(0) { acc: Int, (frame, index) ->
+                frame?.let {
+                    acc or encodeAsBits(index, it)
+                } ?: acc
+            }
+    }
+
+    fun decodeAsType(viewType: Int): ComposableType {
+        if (viewType !in 1..maxBit) {
+            throw RuntimeException("Invalid viewType($viewType). composable view type in ${1} .. $maxBit")
+        }
+        val leftFrame = decodeAsFrame(LEFT, viewType)
+        val iconFrame = decodeAsFrame(ICON, viewType)
+        val titleFrame = decodeAsFrame(TITLE, viewType)
+        val widgetFrame = decodeAsFrame(WIDGET, viewType)
+
+        return ComposableType.obtain(
+            leftFrame = leftFrame,
+            iconFrame = iconFrame,
+            titleFrame = titleFrame,
+            widgetFrame = widgetFrame,
+        )
+    }
+
     @VisibleForTesting
     fun readBit(position: Int, data: Int): Int =
         getBitWithRange(data, rangeList[position])
 
-    fun decodeAsFrame(position: Int, data: Int): ComposableFrame? {
+    private fun decodeAsFrame(position: Int, data: Int): ComposableFrame? {
         val bitValue = readBit(position, data)
         if (bitValue == BIT_NULL) {
             return null
@@ -63,7 +94,7 @@ class FrameBitConverter(
         return frameInfo[position][bitValue - 1]
     }
 
-    fun encodeAsBits(position: Int, frame: ComposableFrame): Int {
+    private fun encodeAsBits(position: Int, frame: ComposableFrame): Int {
         val data = frameInfo[position].indexOf(frame) + 1
         if (data == 0) {
             return 0
