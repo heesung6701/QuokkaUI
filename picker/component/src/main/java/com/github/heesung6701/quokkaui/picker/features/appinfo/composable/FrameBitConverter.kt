@@ -2,6 +2,7 @@ package com.github.heesung6701.quokkaui.picker.features.appinfo.composable
 
 import androidx.annotation.VisibleForTesting
 import com.github.heesung6701.quokkaui.picker.features.composable.ComposableFrame
+import com.github.heesung6701.quokkaui.picker.features.composable.ComposableType
 import kotlin.math.ceil
 import kotlin.math.log2
 

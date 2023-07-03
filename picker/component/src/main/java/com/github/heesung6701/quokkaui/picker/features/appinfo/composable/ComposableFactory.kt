@@ -9,7 +9,6 @@ import com.github.heesung6701.quokkaui.picker.features.appinfo.composable.FrameB
 import com.github.heesung6701.quokkaui.picker.features.appinfo.composable.FrameBitConverter.Companion.WIDGET
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewModel
 import com.github.heesung6701.quokkaui.picker.features.composable.ComposableType
-import com.github.heesung6701.quokkaui.picker.features.composable.ComposableTypeImpl
 import com.github.heesung6701.quokkaui.picker.features.composable.ComposableViewHolder
 
 class ComposableFactory(

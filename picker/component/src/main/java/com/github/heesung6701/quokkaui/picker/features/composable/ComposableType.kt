@@ -5,4 +5,23 @@ interface ComposableType {
     val iconFrame: ComposableFrame?
     val titleFrame: ComposableFrame?
     val widgetFrame: ComposableFrame?
+
+    private class ComposableTypeImpl(
+        override val leftFrame: ComposableFrame?,
+        override val iconFrame: ComposableFrame?,
+        override val titleFrame: ComposableFrame?,
+        override val widgetFrame: ComposableFrame?,
+    ) : ComposableType
+
+    companion object {
+        fun obtain(
+            leftFrame: ComposableFrame?,
+            iconFrame: ComposableFrame?,
+            titleFrame: ComposableFrame?,
+            widgetFrame: ComposableFrame?
+        ): ComposableType {
+
+            return ComposableTypeImpl(leftFrame, iconFrame, titleFrame, widgetFrame)
+        }
+    }
 }
