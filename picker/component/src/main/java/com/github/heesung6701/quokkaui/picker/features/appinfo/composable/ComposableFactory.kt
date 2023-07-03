@@ -9,7 +9,7 @@ import com.github.heesung6701.quokkaui.picker.features.composable.ComposableView
 
 class ComposableFactory(
     private val frameStrategy: FrameStrategy = DefaultFrameStrategy(),
-    private val frameSetBitConverter: FrameBitConverter = FrameBitConverter(frameStrategy)
+    private val frameSetBitConverter: ComposableBitConverter = ComposableBitConverter(frameStrategy)
 ) {
 
     val range = 0..frameSetBitConverter.maxBit

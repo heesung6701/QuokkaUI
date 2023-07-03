@@ -6,7 +6,7 @@ import com.github.heesung6701.quokkaui.picker.features.composable.ComposableType
 import kotlin.math.ceil
 import kotlin.math.log2
 
-class FrameBitConverter(
+class ComposableBitConverter(
     private val frameStrategy: FrameStrategy = DefaultFrameStrategy()
 ) {
 

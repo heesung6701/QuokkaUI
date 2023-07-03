@@ -7,7 +7,7 @@ import org.junit.Test
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 
-class FrameBitConverterTest {
+class ComposableBitConverterTest {
 
     @Test
     fun test_readBit_P01_there_are_same_types_per_each_frame() {
@@ -17,7 +17,7 @@ class FrameBitConverterTest {
         `when`(frameStrategy.iconFrameList).thenReturn((1..15).map { mock(ComposableFrame::class.java) })
         `when`(frameStrategy.widgetFrameList).thenReturn((1..15).map { mock(ComposableFrame::class.java) })
 
-        val converter = FrameBitConverter(frameStrategy)
+        val converter = ComposableBitConverter(frameStrategy)
         Assert.assertEquals((1 shl 16) - 1, converter.maxBit)
 
         listOf(4, 3, 2, 1).mapIndexed { index, it ->
@@ -34,7 +34,7 @@ class FrameBitConverterTest {
         `when`(frameStrategy.titleFrameList).thenReturn((1..15).map { mock(ComposableFrame::class.java) }) // 4-bit
         `when`(frameStrategy.widgetFrameList).thenReturn((1..32).map { mock(ComposableFrame::class.java) }) // 6-bit
 
-        val converter = FrameBitConverter(frameStrategy)
+        val converter = ComposableBitConverter(frameStrategy)
         Assert.assertEquals((1 shl 15) - 1, converter.maxBit)
 
         listOf(3, 7, 15, 63).mapIndexed { index, it ->
@@ -60,7 +60,7 @@ class FrameBitConverterTest {
         val startTitleBit = 8
         val startWidgetBit = 12
 
-        val frameBitConverter = FrameBitConverter(frameStrategy)
+        val composableBitConverter = ComposableBitConverter(frameStrategy)
 
         val testList = mutableListOf<Pair<Int, ComposableType>>()
         (listOf(null) + leftList).forEachIndexed { i, leftFrame ->
@@ -87,8 +87,8 @@ class FrameBitConverterTest {
         }
 
         testList.forEach { (bit, type) ->
-            Assert.assertEquals(bit.toString(2), frameBitConverter.encodeAsBits(type).toString(2))
-            Assert.assertEquals(type, frameBitConverter.decodeAsType(bit))
+            Assert.assertEquals(bit.toString(2), composableBitConverter.encodeAsBits(type).toString(2))
+            Assert.assertEquals(type, composableBitConverter.decodeAsType(bit))
         }
     }
 }
