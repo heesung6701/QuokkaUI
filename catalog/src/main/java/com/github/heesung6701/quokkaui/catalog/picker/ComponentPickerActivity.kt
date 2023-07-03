@@ -20,7 +20,7 @@ class ComponentPickerActivity : AppCompatActivity() {
             name = "기본",
             appInfoList = AppInfoHelper.getInstalledPackages(packageManager),
             configuration = {
-
+                setShowAllApps(false)
             }
         )
     }
@@ -33,6 +33,9 @@ class ComponentPickerActivity : AppCompatActivity() {
                     appInfo.subTitle = "index - $index"
                     appInfo
                 },
+            configuration = {
+                setShowAllApps(false)
+            }
         )
     }
 
@@ -45,6 +48,7 @@ class ComponentPickerActivity : AppCompatActivity() {
                     appInfo
                 },
             configuration = {
+                setShowAllApps(false)
                 setOnActivateChangeListener(object : ComponentPickerView.OnActivateChangeListener {
                     override fun onActivateChanged(appInfo: AppInfo) {
                         Toast.makeText(
@@ -68,6 +72,7 @@ class ComponentPickerActivity : AppCompatActivity() {
                     appInfo
                 },
             configuration = {
+                setShowAllApps(false)
                 setOnActivateChangeListener(object : ComponentPickerView.OnActivateChangeListener {
                     override fun onActivateChanged(appInfo: AppInfo) {
                         Toast.makeText(
