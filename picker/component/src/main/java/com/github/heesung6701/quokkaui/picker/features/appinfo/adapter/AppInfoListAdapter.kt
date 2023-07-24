@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class AppInfoListAdapter(private val composableFactory: ComposableFactory = ComposableFactory()) :
+class AppInfoListAdapter(private val composableFactory: ComposableFactory) :
     ListAdapter<ViewModel, ComposableViewHolder>(DiffUtils) {
 
     companion object {

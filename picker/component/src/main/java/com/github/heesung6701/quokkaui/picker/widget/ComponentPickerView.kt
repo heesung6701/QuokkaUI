@@ -9,6 +9,7 @@ import com.github.heesung6701.quokkaui.picker.features.appinfo.data.AppInfo
 import com.github.heesung6701.quokkaui.picker.features.appinfo.decorator.RoundItemDecorator
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.HasSwitch
 import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewModelFactory
+import com.github.heesung6701.quokkaui.picker.features.di.Providers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -24,14 +25,17 @@ class ComponentPickerView @JvmOverloads constructor(
         fun onActivateChanged(appInfo: AppInfo)
     }
 
-    private val appInfoListAdapter = AppInfoListAdapter()
-
-    private val viewModelFactory =
-        ViewModelFactory(context)
-
     private var onActivateChangeListener: OnActivateChangeListener? = null
 
+    private val viewModelFactory : ViewModelFactory
+
+    private val appInfoListAdapter : AppInfoListAdapter
+
     init {
+        val providers = Providers(context)
+        viewModelFactory = providers.viewModelFactory
+        appInfoListAdapter = providers.appInfoListAdapter
+
         layoutManager = LinearLayoutManager(context)
         adapter = appInfoListAdapter
         addItemDecoration(RoundItemDecorator())

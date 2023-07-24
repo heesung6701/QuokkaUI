@@ -8,8 +8,8 @@ import com.github.heesung6701.quokkaui.picker.features.composable.ComposableType
 import com.github.heesung6701.quokkaui.picker.features.composable.ComposableViewHolder
 
 class ComposableFactory(
-    private val frameStrategy: FrameStrategy = DefaultFrameStrategy(),
-    private val frameSetBitConverter: ComposableBitConverter = ComposableBitConverter(frameStrategy)
+    private val frameStrategy: FrameStrategy,
+    private val frameSetBitConverter: ComposableBitConverter
 ) {
 
     val range = 0..frameSetBitConverter.maxBit
