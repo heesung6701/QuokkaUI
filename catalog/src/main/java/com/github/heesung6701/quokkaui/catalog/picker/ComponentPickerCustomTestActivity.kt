@@ -7,6 +7,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
 import com.github.heesung6701.quokkaui.catalog.databinding.ActivityComponentPickerCustomTestBinding
 import com.github.heesung6701.quokkaui.picker.features.appinfo.data.AppInfo
@@ -124,6 +125,7 @@ class ComponentPickerCustomTestActivity : AppCompatActivity() {
         val widget: DataSet? = null,
     )
 
+    @Keep
     open class CustomProvider(context: Context): Providers(context) {
 
     }

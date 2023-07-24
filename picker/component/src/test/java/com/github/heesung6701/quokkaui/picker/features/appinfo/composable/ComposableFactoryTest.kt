@@ -17,7 +17,7 @@ class ComposableFactoryTest {
 
     @Test
     fun test_getItemType_with_ViewModel() {
-        val composableFactory = ComposableFactory()
+        val composableFactory = ComposableFactory(DefaultFrameStrategy(), ComposableBitConverter())
         val mockDrawable = mock(Drawable::class.java)
 
         listOf(

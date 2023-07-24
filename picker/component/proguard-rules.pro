@@ -19,3 +19,11 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class * extends com.github.heesung6701.quokkaui.picker.features.di.Providers {
+    public <init>(...);
+}
+
+-keep class * extends com.github.heesung6701.quokkaui.picker.features.composable.ComposableItemViewHolder {
+    public <init>(...);
+}

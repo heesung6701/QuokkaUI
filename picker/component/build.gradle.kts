@@ -24,6 +24,10 @@ android {
                 "proguard-rules.pro"
             )
         }
+
+        all {
+            consumerProguardFiles("proguard-rules.pro")
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

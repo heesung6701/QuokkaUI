@@ -43,7 +43,11 @@ class ComponentPickerView @JvmOverloads constructor(
         val providers: Providers = try {
             val clazz: Class<*> = Class.forName(providerClassName!!)
             clazz.getConstructor(Context::class.java).newInstance(context) as Providers
-        } catch (e: RuntimeException) {
+        } catch (e: ClassNotFoundException) {
+            e.printStackTrace()
+            Providers(context)
+        }
+        catch (e: RuntimeException) {
             e.printStackTrace()
             Providers(context)
         }
