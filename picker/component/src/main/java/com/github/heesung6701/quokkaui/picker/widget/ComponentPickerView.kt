@@ -2,8 +2,10 @@ package com.github.heesung6701.quokkaui.picker.widget
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.annotation.VisibleForTesting
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.heesung6701.quokkaui.picker.R
 import com.github.heesung6701.quokkaui.picker.features.appinfo.adapter.AppInfoListAdapter
 import com.github.heesung6701.quokkaui.picker.features.appinfo.data.AppInfo
 import com.github.heesung6701.quokkaui.picker.features.appinfo.decorator.RoundItemDecorator
@@ -27,12 +29,25 @@ class ComponentPickerView @JvmOverloads constructor(
 
     private var onActivateChangeListener: OnActivateChangeListener? = null
 
-    private val viewModelFactory : ViewModelFactory
+    @VisibleForTesting
+    val viewModelFactory: ViewModelFactory
 
-    private val appInfoListAdapter : AppInfoListAdapter
+    private val appInfoListAdapter: AppInfoListAdapter
 
     init {
-        val providers = Providers(context)
+        val providerClassName =
+            context.obtainStyledAttributes(attrs, R.styleable.ComponentPickerView).use {
+                it.getString(R.styleable.ComponentPickerView_providerClass)
+            }
+
+        val providers: Providers = try {
+            val clazz: Class<*> = Class.forName(providerClassName!!)
+            clazz.getConstructor(Context::class.java).newInstance(context) as Providers
+        } catch (e: RuntimeException) {
+            e.printStackTrace()
+            Providers(context)
+        }
+
         viewModelFactory = providers.viewModelFactory
         appInfoListAdapter = providers.appInfoListAdapter
 

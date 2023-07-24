@@ -10,13 +10,13 @@ import com.github.heesung6701.quokkaui.picker.features.appinfo.viewmodel.ViewMod
 
 open class Providers(context: Context) {
 
-    private val frameStrategy: FrameStrategy by lazy { DefaultFrameStrategy() }
+    open val frameStrategy: FrameStrategy by lazy { DefaultFrameStrategy() }
 
-    private val frameSetBitConverter: ComposableBitConverter by lazy { ComposableBitConverter(frameStrategy) }
+    open val frameSetBitConverter: ComposableBitConverter by lazy { ComposableBitConverter(frameStrategy) }
 
-    private val composableFactory: ComposableFactory by lazy { ComposableFactory(frameStrategy, frameSetBitConverter) }
+    open val composableFactory: ComposableFactory by lazy { ComposableFactory(frameStrategy, frameSetBitConverter) }
 
-    val viewModelFactory by lazy { ViewModelFactory(context) }
+    open val viewModelFactory by lazy { ViewModelFactory(context) }
 
-    val appInfoListAdapter by lazy { AppInfoListAdapter(composableFactory) }
+    open val appInfoListAdapter by lazy { AppInfoListAdapter(composableFactory) }
 }

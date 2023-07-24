@@ -4,7 +4,8 @@
     <string name="title_activity_touch_delegate">TouchDelegate Test</string>
     <string name="title_activity_dialog_anchor">WindowAnchor Test</string>
     <string name="title_activity_picker_component">Picker-Component Test</string>
-    <string name="title_activity_picker_component_composable">Picker-Component(Composable Test)</string>
+    <string name="title_activity_picker_component_composable">Picker-Component(Composable Sample)</string>
+    <string name="title_activity_picker_component_custom">Picker-Component(Custom Sample)</string>
     <string name="next">next</string>
     <string name="prev">prev</string>
 </resources>

@@ -34,6 +34,10 @@
             android:name=".picker.ComponentPickerComposableTestActivity"
             android:exported="true"
             android:title="@string/title_activity_picker_component_composable" />
+        <activity
+            android:name=".picker.ComponentPickerCustomTestActivity"
+            android:exported="true"
+            android:title="@string/title_activity_picker_component_custom" />
     </application>
 
 </manifest>

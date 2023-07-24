@@ -10,11 +10,11 @@ import com.github.heesung6701.quokkaui.picker.features.appinfo.data.AppInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
 
-class ViewModelFactory(val context: Context) {
+open class ViewModelFactory(val context: Context) {
 
     private val packageManager = context.packageManager
 
-    fun createAppInfoViewModel(appInfo: AppInfo): ViewModel {
+    open fun createAppInfoViewModel(appInfo: AppInfo): ViewModel {
         if (appInfo.activate != null) {
             return AppInfoSwitchViewModel(appInfo,
                 appName = getDefaultLabel(appInfo),
